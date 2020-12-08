@@ -1,0 +1,26 @@
+doctype html
+html
+   head
+      title Väderapp
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      meta(http-equiv="X-UA-Compatible", content="ie=edge")
+      link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous")
+      link(rel="stylesheet" href="/css/style.css")
+   body
+      .header
+         h1.text-center RUBRIK
+      .container
+         .row
+            .col-5.text-center
+               .aside
+                  h4 Åk dit det finaste vädret är! 
+                  button.btn.btn-primary(type='button') Hämta
+                  p.bus Det är finast väder i <placeholder> och du tar dig dit genom xxxxx.
+            .col-7
+               .map
+                  img(src='https://www.xda-developers.com/files/2020/02/google-maps-new-logo.jpg' width='700"' height='400')
+
+
+      script(src='https://code.jquery.com/jquery-3.5.1.js' integrity='sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=' crossorigin='anonymous')
+      script(src='/js/script.js')

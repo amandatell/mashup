@@ -1,0 +1,9 @@
+.header {
+    margin: 1% 0 1% 0;
+    padding: 1%;
+    box-shadow: 0 10px 10px -10px #bebebe80;
+}
+
+.container {
+    margin: 2% auto auto 1%
+}
