@@ -6,6 +6,6 @@ Ladda ner senaste verisionen av node.js.
 
 Skriv "npm install" för att ladda ner alla dependencies.
 
-Skriv node "indes.js" för att köra programmet.
+Skriv node "index.js" för att köra programmet.
 
 När du laddar ner en ny modul och vill spara det i projektet skriv "npm install xxx --save".
