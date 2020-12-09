@@ -15,8 +15,7 @@ app.get('/', (req, res) => {
         res.json({user: "kalle"})
     } else {
         res.render('404')
-    }
-        
+    }     
 })
 
 app.listen(port, () => {
