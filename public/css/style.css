@@ -7,3 +7,8 @@
 .container {
     margin: 2% auto auto 1%
 }
+
+#map {
+    height: 75vh;
+    width: 100vh;
+  }
