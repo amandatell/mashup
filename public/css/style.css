@@ -5,10 +5,22 @@
 }
 
 .container {
-    margin: 2% auto auto 1%
+    margin: 1% auto auto 1%;
+    padding-bottom: 2vh;
 }
 
 #map {
-    height: 75vh;
-    width: 120vh;
+    height: 70vh;
+    width: 110vh;
+    margin: 1%;
+    
   }
+
+.footer {
+    box-shadow: 0 -5px 9px -6px #bebebe80;
+    height: 20px;
+}
+
+.footer > p {
+    padding-top: 1vh;
+}
