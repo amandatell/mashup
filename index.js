@@ -6,6 +6,7 @@ const port = 3000
 app.set('view engine', 'pug');
 app.set('views','./views');
 app.use(express.static('public'));
+app.use(express.json());
 
 app.get('/', (req, res) => {
     const accept = req.accepts(['html', 'json'])
@@ -19,18 +20,11 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    const accept = req.accepts(['json'])
-    req.body; // JavaScript object containing the parse JSON
-    res.send(req.body);
+    if (req.is('application/json')) {
+        console.log(req.body);
+        res.json(req.body);
+    }
     });
-    /*if (accept === 'json') {
-        const pos = req.body
-        console.log(pos)
-        res.send(pos)
-    }*/
-
-
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

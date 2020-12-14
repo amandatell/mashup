@@ -6,12 +6,11 @@ $(document).ready(function () {
     .done(function (data) { 
         console.log(data)
     });
-});
+  });
 
 let map, infoWindow;
 
 function initMap() {
-  console.log("Karta")
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 55.893180, lng: 13.582728 }, 
     zoom: 8,
@@ -35,7 +34,6 @@ function initMap() {
           infoWindow.open(map);
           map.setCenter(pos);
           postLatLng(pos);
-          console.log(position.coords.latitude, position.coords.longitude)
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -63,11 +61,10 @@ function postLatLng(pos) {
   $.ajax({
     method: "POST",
     url:'http://localhost:3000/',
-    data: pos,
-    headers: {"Accept": "application/json"}
+    data: JSON.stringify(pos),
+    headers: {"Content-type": "application/json"}
   }) 
   .done(function (data) { 
     console.log(data)
-  }); 
-
+  });
 }
