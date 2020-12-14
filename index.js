@@ -18,6 +18,20 @@ app.get('/', (req, res) => {
     }     
 })
 
+app.post('/', (req, res) => {
+    const accept = req.accepts(['json'])
+    req.body; // JavaScript object containing the parse JSON
+    res.send(req.body);
+    });
+    /*if (accept === 'json') {
+        const pos = req.body
+        console.log(pos)
+        res.send(pos)
+    }*/
+
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
