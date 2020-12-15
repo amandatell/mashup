@@ -22,11 +22,11 @@
 }
 
 .footer > p {
-    padding-top: 1vh;
+    padding-top: 1.5vh;
 }
 
-#locationButton {
+/*#locationButton {
     height: 70vh;
     width: 110vh;
     margin: 1%;
-}
+}*/
