@@ -9,8 +9,7 @@ function test(){
     let maxLat = 56;
 
     smhi.getData((cloudData, tempData) => {
-        //console.log("TEMP: " + tempData.station[0].value[0].value);
-        //console.log("CLOUDS: " + cloudData.station[0].value[0].value);
+
         let boxedStationsTemp = [];
         let boxedStationsCloud = [];
 
@@ -20,10 +19,8 @@ function test(){
             let curLat = element.latitude;
             
             if(curLat < maxLat && curLat > minLat){
-                console.log(element);
                 if (curLong < maxLong && curLong > minLong && element.value != null) {
                     boxedStationsCloud.push(element);
-                    console.log("Pushed!");
                 }
             }
         }
@@ -47,16 +44,15 @@ function test(){
             if(boxedStationsCloud[i].value != null){
                 let curCloudvalue = boxedStationsCloud[i].value[0].value;
                 if(curCloudvalue < lowestClouds){
-                    if(i != 0){
+                    if(lowestClouds != 150){
                         foundDifference = true;
+                        console.log("Difference at: " + i);
                     }
                     lowestCloudsIndex = i;
                 }
             }
         }
-        console.log("Lowest amount of clouds found in: " + boxedStationsCloud[lowestCloudsIndex].name + " \nCloud percentage: "
-            + boxedStationsCloud[lowestCloudsIndex].value[0].value + "%"
-        );
+     
 
         if(!foundDifference){
             let highestValue = -100;
@@ -73,7 +69,11 @@ function test(){
             }
             console.log("Highest temp: " + highestValue + " Measured in: " + boxedStationsTemp[highestIndex].name);
             console.log("---------------------------")
-        }    
+        } else{
+            console.log("Lowest amount of clouds found in: " + boxedStationsCloud[lowestCloudsIndex].name + " \nCloud percentage: "
+            + boxedStationsCloud[lowestCloudsIndex].value[0].value + "%"
+        );
+        }  
     });
 }
 
