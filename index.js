@@ -17,14 +17,16 @@ app.get('/', (req, res) => {
         res.json({user: "kalle"})
     } else {
         res.render('404')
-    } 
-    //testmetod för smhi.    
-    //apiController.test();
+    }
+    //testmetod för smhi.
+    apiController.cacheData();
 })
 
 app.post('/', (req, res) => {
     if (req.is('application/json')) {
         console.log(req.body);
+        const coords = req.body;
+        apiController.getData(coords);
         res.json(req.body);
     }
     });
