@@ -11,8 +11,8 @@ const e = require('express');
 
 
         /*
-        Metoden tar in din nuvarande position, och returnerar sedan lite info kring den väder-station
-        som rapporterat in bäst väder inom den senaste timmen.
+        Metoden tar in din nuvarande position, och returnerar sedan lite info kring den 
+        väder-station som rapporterat in bäst väder inom den senaste timmen.
 
         Kontrollen kommer att prioritera stationer med minst moln, men om alla stationer i området
         rapporterat in samma mängd moln, kommer istället en kontroll på temperatur att jämföras.
@@ -33,7 +33,7 @@ const e = require('express');
         och temperatur vid samma tillfälle. Om stationen rapporterat båda, ska dock båda värden
         finnas med.
         */
-    function getBestWeather(curLong, curLat) {
+    function getBestWeather(curLat, curLong) {
         let boxedClouds = [];
         let boxedTemp = [];
         let maxLong = curLong + boxSize;
@@ -121,7 +121,7 @@ const e = require('express');
             for(var i in boxedClouds){
                 if(ret.id == boxedClouds[i].key){
                     if(boxedClouds[i].value != null){
-                     ret.cloud = boxedClouds[i].value[i].value;
+                     ret.cloud = boxedClouds[i].value[0].value;
                     }
                 }
             }
@@ -136,6 +136,7 @@ const e = require('express');
         getTemp((cloudData, tempdata) => {
             cloudDataCache = cloudData;
             tempDataCache = tempdata;
+            console.log("SMHI: updated data.");
         });   
     }
 
