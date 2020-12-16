@@ -68,7 +68,26 @@
             }
         }
 
-
+        /*
+            {
+            "key": "188790",
+            "name": "Abisko Aut",
+            "owner": "SMHI",
+            "ownerCategory": "SMHI",
+            "from": 1539676850000,
+            "to": 1608120000000,
+            "height": 392.303,
+            "latitude": 68.3538,
+            "longitude": 18.8164,
+            "value": [
+                {
+                    "date": 1608120000000,
+                    "value": "-2.6",
+                    "quality": "G"
+                }
+            ]
+        }
+        */
         return ret;
     }
 
