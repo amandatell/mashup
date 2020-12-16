@@ -8,6 +8,7 @@ app.set('view engine', 'pug');
 app.set('views','./views');
 app.use(express.static('public'));
 app.use(express.json());
+apiController.cacheData();
 
 app.get('/', (req, res) => {
     const accept = req.accepts(['html', 'json'])
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
         res.render('404')
     }
     //testmetod för smhi.
-    apiController.cacheData();
+    
 })
 
 app.post('/', (req, res) => {
