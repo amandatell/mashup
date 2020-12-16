@@ -1,5 +1,6 @@
 const express = require('express');
 const { render } = require('pug');
+const apiController = require('./APICallers/apiController');
 const app = express()
 const port = 3000
 
@@ -16,8 +17,8 @@ app.get('/', (req, res) => {
         res.json({user: "kalle"})
     } else {
         res.render('404')
-    }     
-    //testmetod för smhi.    
+    }
+    //testmetod för smhi.
     apiController.cacheData();
 })
 
