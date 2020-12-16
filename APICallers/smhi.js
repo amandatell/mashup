@@ -1,15 +1,38 @@
+const e = require('express');
 
     https = require('https');
     const boxSize = 2;
     var cloudDataCache;
     var tempDataCache;
 
-    function init(controllerCallback) {
-        getData(controllerCallback);
+    function init() {
+        getData();
     }
 
 
-    //Måste få in timed task för uppdatering av väder data.
+        /*
+        Metoden tar in din nuvarande position, och returnerar sedan lite info kring den väder-station
+        som rapporterat in bäst väder inom den senaste timmen.
+
+        Kontrollen kommer att prioritera stationer med minst moln, men om alla stationer i området
+        rapporterat in samma mängd moln, kommer istället en kontroll på temperatur att jämföras.
+
+        Den station som returneras är den sist funna med det bästa funna värdet, och det finns alltså
+        ingen prioritering kring närhet till startposition.
+
+        Retur:
+        {
+            id : "val" ,
+            longitude : "val",
+            latitude : "val",
+            temp : "val",
+            cloud : "val"
+        }
+        Viktigt att notera kring returvärdet är att antingen cloud eller temp kan vara null.
+        Detta kommer sig av att det inte är säkert att samma station rapporterat både väder
+        och temperatur vid samma tillfälle. Om stationen rapporterat båda, ska dock båda värden
+        finnas med.
+        */
     function getBestWeather(curLong, curLat) {
         let boxedClouds = [];
         let boxedTemp = [];
@@ -18,21 +41,29 @@
         let maxLat = curLat + boxSize;
         let minLat = curLat - boxSize;
         let differenceClouds = false;
-        let ret;
+        let ret = {
+            ['id'] : null,
+            ['longitude'] : null,
+            ['latitude'] : null,
+            ['temp'] : null,
+            ['cloud'] : null
+        };
         
 
         for(var i in cloudDataCache.station){
             let element = cloudDataCache.station[i];
+            
             let stationLong = element.longitude;
-            let stationLat = element.latitutde;
+            let stationLat = element.latitude;
 
             if(element.value != null && stationLong > minLong && stationLong < maxLong){
                 if(stationLat < maxLat && stationLat > minLat){
                     let len = boxedClouds.length;
                     if(len > 1 && boxedClouds[len-1].value[0].value != element.value[0].value){
-                        differenceClouds = true;
+                        differenceClouds = false;
                     }
                     boxedClouds.push(element);
+                
                 }
             }
         }
@@ -40,11 +71,11 @@
         for(var i in tempDataCache.station){
             let element = tempDataCache.station[i];
             let stationLong = element.longitude;
-            let stationLat = element.latitutde;
+            let stationLat = element.latitude;
 
             if(element.value != null && stationLong < maxLong  && stationLong > minLong){
                 if(stationLat > minLat && stationLat < maxLat){
-                    boxedTemp.push(stationLat)
+                    boxedTemp.push(element);
                 }
             }
         }
@@ -54,54 +85,58 @@
             let minClouds = 150;
             for(var i in boxedClouds){
                 if(boxedClouds[i].value[0].value < minClouds){
-                    minClouds = boxedClouds.value[0].value;
-                    ret = boxedClouds[i];
+                    minClouds = boxedClouds[i].value[0].value;
+                    ret.id = boxedClouds[i].key;
+                    ret.longitude = boxedClouds[i].longitude;
+                    ret.latitude = boxedClouds[i].latitude;
+                    ret.cloud = boxedClouds[i].value[0].value;
+                    ret.temp = null;
                 }
             }
+
+            for(var i in boxedTemp){
+                
+                if(ret.id == boxedTemp[i].key){
+                    if(boxedTemp[i].value != null){
+                     ret.temp = boxedTemp[i].value[i].value;
+                    }
+                    
+                }
+            }
+            //Detta körs om man inte hittat någon skillnad i alla genomsökta moln.
+            //börjar med att leta upp en av stationerna med bäst temperatur.
         } else{
             let maxTemp = -100;
             for(var i in boxedTemp){
                 if(boxedTemp[i].value[0].value > maxTemp){
-                    let maxTemp = boxedTemp[i].value[0].value;
-                    let ret = boxedTemp[i];
+                    maxTemp = boxedTemp[i].value[0].value;
+                    ret.id = boxedTemp[i].key;
+                    ret.longitude = boxedTemp[i].longitude;
+                    ret.latitude = boxedTemp[i].latitude;
+                    ret.temp = boxedTemp[i].value[0].value;
+                    ret.cloud = null;
+                }
+            }
+            //Kollar sedan efter molnvärde i listan med stationer som rapporterat detta.
+            for(var i in boxedClouds){
+                if(ret.id == boxedClouds[i].key){
+                    if(boxedClouds[i].value != null){
+                     ret.cloud = boxedClouds[i].value[i].value;
+                    }
                 }
             }
         }
-
-        /*
-            {
-            "key": "188790",
-            "name": "Abisko Aut",
-            "owner": "SMHI",
-            "ownerCategory": "SMHI",
-            "from": 1539676850000,
-            "to": 1608120000000,
-            "height": 392.303,
-            "latitude": 68.3538,
-            "longitude": 18.8164,
-            "value": [
-                {
-                    "date": 1608120000000,
-                    "value": "-2.6",
-                    "quality": "G"
-                }
-            ]
-        }
-        */
         return ret;
     }
 
-    function getData(controllerCallback) {
+    
+
+    function getData() {
         //check if data is up to date.
         getTemp((cloudData, tempdata) => {
             cloudDataCache = cloudData;
             tempDataCache = tempdata;
-        });
-
-        if(cloudDataCache != null && tempDataCache != null){
-            controllerCallback(cloudDataCache, tempDataCache);
-        }
-        
+        });   
     }
 
     function getTemp(callback) {
@@ -114,7 +149,6 @@
             });
 
             resp.on('end', () =>{
-                console.log(data);
                 getClouds(callback, JSON.parse(data));
             });
         });
@@ -138,4 +172,4 @@
         
     }
 
-module.exports = {getData}
+module.exports = {getBestWeather, init}
