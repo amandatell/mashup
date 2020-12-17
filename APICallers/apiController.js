@@ -8,12 +8,10 @@ function getData(lat, lng) {
     let json;
     console.log(lat, lng);
     let goal = smhi.getBestWeather(lat, lng);
-    let coord = {start: {lat: lat, lng: lat}, goal: {lat: goal.latitude, lng: goal.longitude}};
+    let coords = {start: {lat: lat, lng: lat}, goal: {lat: goal.latitude, lng: goal.longitude}};
+    // let transport = xxx.xxx(coords)
     return goal;
-    // let transport = xxx.xxx(coords.lat, coords.lng, goal.lat, goal.lng)
-    // consol.log(transport)
-    // Lägga i start, goal och transport i ett JSON och returnera till index
-    // return json
+    // return transport
 }
 
 module.exports= {cacheData, getData}
