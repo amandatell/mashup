@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $.ajax({
       url: 'http://localhost:3000/',
       headers: {"Accept": "application/json"}
@@ -6,7 +6,7 @@ $(document).ready(function () {
     .done(function (data) { 
         console.log(data)
     });
-  });
+  });*/
 
 let map, infoWindow;
 
@@ -43,7 +43,8 @@ function initMap() {
           infoWindow.open(map);
           map.setCenter(pos);
           map.setZoom(10);
-          postLatLng(pos);
+          //postLatLng(pos);
+          getData(pos);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -67,7 +68,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 }
 
-function postLatLng(pos) {
+function getData(pos){
+  $.ajax({
+    url: 'http://localhost:3000/?lat= '+ pos.lat + '&lng=' + pos.lng,
+    headers: {"Accept": "application/json"}
+  })
+  .done(function (data) { 
+      console.log(data)
+  });
+
+}
+/*function postLatLng(pos) {
   $.ajax({
     method: "POST",
     url:'http://localhost:3000/',
@@ -77,4 +88,4 @@ function postLatLng(pos) {
   .done(function (data) { 
     console.log(data)
   });
-}
+}*/
