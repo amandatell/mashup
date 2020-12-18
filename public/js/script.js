@@ -9,7 +9,7 @@
   });*/
 
 let map, infoWindow;
-
+let endPos;
 /// JUST NU HÄMTAR "GET_DATA" PLATSTJÄNST
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -31,20 +31,32 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          var marker = new google.maps.Marker({
+          var startMarker = new google.maps.Marker({
             position: pos,
-            label: { color: '#ffffff', fontWeight: 'bold', fontSize: '8px', text: 'Start' }
-        });
-        
+            label: { color: '#ffffff', fontWeight: 'bold', fontSize: '12px', text: 'Du' }
+          });
+          
           // To add the marker to the map, call setMap();
-          marker.setMap(map);
+          getData(pos);
+          var goalMarker = new google.maps.Marker({
+            position: endPos,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+          });
+          console.log(endPos)
+          startMarker.setMap(map);
+          goalMarker.setMap(map);
+          //console.log(goalMarker)
           //infoWindow.setPosition(pos);
+          //infoWindow.setPosition(endPos);
           //infoWindow.setContent("Plats hittad.");
           infoWindow.open(map);
-          map.setCenter(pos);
+          let center = {lat: (pos.lat + endPos.lat) / 2, lng: (pos.lng + endPos.lng) / 2}
+          console.log(center)
+          map.setCenter(center);
+          //map.setCenter(endPos);
           map.setZoom(10);
           //postLatLng(pos);
-          getData(pos);
+          
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -69,13 +81,18 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function getData(pos){
+  console.log(pos)
   $.ajax({
     url: 'http://localhost:3000/?lat= '+ pos.lat + '&lng=' + pos.lng,
+    async: false,
     headers: {"Accept": "application/json"}
   })
   .done(function (data) { 
-      console.log(data)
+      data = JSON.parse(data);
+      endPos = {lat: data.latitude, lng: data.longitude};
+
   });
+  return endPos
 
 }
 /*function postLatLng(pos) {
