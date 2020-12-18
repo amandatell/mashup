@@ -7,6 +7,30 @@ function initMap() {
     zoom: 8,
   });
   infoWindow = new google.maps.InfoWindow();
+
+  
+
+  document.getElementById('test').addEventListener("click", () => {
+    showResults();
+  })
+
+  document.getElementById('test2').addEventListener("click", () => {
+    removeResults();
+  })
+
+  document.getElementById('resList').style.visibility = "hidden";
+
+  function showResults(){
+    console.log("CLICK!");
+    document.getElementById('divSubmit').style.visibility = "hidden";
+    document.getElementById('resList').style.visibility = "visible";
+  }
+
+  function removeResults(){
+    document.getElementById('divSubmit').style.visibility = "visible";
+    document.getElementById('resList').style.visibility = "hidden";
+  }
+
   document.querySelector('.get_data').addEventListener("click", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
