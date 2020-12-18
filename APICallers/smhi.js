@@ -8,7 +8,7 @@ var tempDataCache;
 
 function init() {
     getData();
-    cron.schedule('* * 1 * *', () =>{
+    cron.schedule('* * 1 * * *', () =>{
         getData();
     });
     //getData();
