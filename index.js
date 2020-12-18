@@ -15,7 +15,10 @@ app.get('/', (req, res) => {
     if (accept === 'html') {
         res.render('index')
     } else if (accept === 'json') {
-        res.json({user: "kalle"})
+        let lat = req.query.lat;
+        let lng = req.query.lng;
+        goal = apiController.getData(lat, lng);
+        res.send(goal);
     } else {
         res.render('404')
     }
@@ -23,14 +26,14 @@ app.get('/', (req, res) => {
     
 })
 
-app.post('/', (req, res) => {
+/*app.post('/', (req, res) => {
     if (req.is('application/json')) {
         console.log(req.body);
         const coords = req.body;
         apiController.getData(coords);
         res.json(req.body);
     }
-    });
+    });*/
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

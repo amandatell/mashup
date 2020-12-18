@@ -4,14 +4,15 @@ function cacheData() {
     smhi.init()
 }
 
-function getData(start) {
+function getData(lat, lng) {
     let json;
-    let goal = smhi.getBestWeather(start.lat, start.lng);
-    console.log(goal)
-    // let transport = xxx.xxx(coords.lat, coords.lng, goal.lat, goal.lng)
-    // consol.log(transport)
-    // Lägga i start, goal och transport i ett JSON och returnera till index
-    // return json
+    console.log(lat, lng);
+    let goal = smhi.getBestWeather(lat, lng);
+    let coords = {start: {lat: parseFloat(lat), lng: parseFloat(lng)}, goal: {lat: goal.latitude, lng: goal.longitude}};
+    console.log(coords)
+    // let transport = xxx.xxx(coords)
+    return goal;
+    // return transport
 }
 
 module.exports= {cacheData, getData}
