@@ -24,11 +24,19 @@ function parseData(data) {
     console.log('Parsing route data...')
     var trafikLab = JSON.parse(data);
     var jsonRoute = trafikLab.Trip[0].LegList.Leg;
+    var isDone = false;
 
     jsonRoute.forEach(element => {
         var coordinatesObj = {
+            //Start- and destination names are either the coordinates or the station name
+            destName: element.Destination.name,
+            startName: element.Origin.name,
+
+            //Start coordinates
             startLong: element.Origin.lon,
             startLat: element.Origin.lat,
+
+            //Destination coordinates
             destLong: element.Destination.lon,
             destLat: element.Destination.lat
         }
@@ -40,6 +48,8 @@ function parseData(data) {
         console.log('Start: ' + 'Longitud: ' + element.startLong + ' / ' + 'Latitud: ' + element.startLat + '\n' +
             'Destination: ' + 'Longitud: ' + element.destLong + ' / ' + 'Latitud: ' + element.destLat + '\n');
     })
+
+    isDone = true;
 }
 
 module.exports = { getRoute }
