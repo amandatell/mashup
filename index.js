@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
     if (accept === 'html') {
         res.render('index')
     } else if (accept === 'json') { 
+        if (req.query.place) {
+            // Kalla på detta i frontend
+            let coords = apiController.getCoords(req.query.place);
+        }
         // locationtype 
         let lat = req.query.lat;
         let lng = req.query.lng;

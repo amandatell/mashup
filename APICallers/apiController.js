@@ -19,5 +19,24 @@ function getData(lat, lng) {
     return data;
     // return transport
 }
+// Göra promise
+function getCoords(cityName){
+    let data = '';
+    https.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityName}&region=sv&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI`, 
+    (resp) =>{
+        
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+ 
+        resp.on('end', () =>{
+            coords = JSON.parse(data); 
+            const x = 0
+            coords = coords.results[x].geometry.location;
+            console.log(coords)
+        });
+    });
+    //console.log(coords)
+}
 
-module.exports= {cacheData, getData}
+module.exports= {cacheData, getData, getCoords}
