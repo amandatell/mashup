@@ -14,7 +14,8 @@ app.get('/', (req, res) => {
     const accept = req.accepts(['html', 'json'])
     if (accept === 'html') {
         res.render('index')
-    } else if (accept === 'json') {
+    } else if (accept === 'json') { 
+        // locationtype 
         let lat = req.query.lat;
         let lng = req.query.lng;
         goal = apiController.getData(lat, lng);
