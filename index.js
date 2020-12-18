@@ -11,6 +11,8 @@ app.use(express.json());
 apiController.cacheData();
 
 app.get('/', (req, res) => {
+    console.log("Get");
+    console.log(req.query);
     const accept = req.accepts(['html', 'json'])
     if (accept === 'html') {
         res.render('index')
