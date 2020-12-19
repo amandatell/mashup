@@ -66,7 +66,7 @@ function getData(pos){
     headers: {"Accept": "application/json"}
   })
   .done(function (data) { 
-      finalData = JSON.parse(data);
+      finalData = data;
   });
 
 }

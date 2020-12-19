@@ -30,11 +30,11 @@ function getCoords(cityName){
     .then(response => {
         try {
             var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
+            return data;
         } catch(e){
             if (e instanceof TypeError) {
                 return null;
         }
-        return data;
     }})
     .catch(error => console.log(error));
 }
