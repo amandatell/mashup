@@ -16,8 +16,13 @@ app.get('/', (req, res) => {
         res.render('index')
     } else if (accept === 'json') { 
         if (req.query.place) {
-            apiController.getCoords(req.query.place).then(response => res.json(response))
-        }
+            apiController.getCoords(req.query.place).then(response => {
+                if (response != null)
+                    res.json(response)
+                else
+                    res.sendStatus(400);
+        })
+    }
         else {
             let lat = req.query.lat;
             let lng = req.query.lng;

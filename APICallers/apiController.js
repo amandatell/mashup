@@ -27,7 +27,15 @@ function getData(lat, lng) {
 function getCoords(cityName){
     const x = 0
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
-    .then(response => {var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); return data;})
+    .then(response => {
+        try {
+            var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
+        } catch(e){
+            if (e instanceof TypeError) {
+                return null;
+        }
+        return data;
+    }})
     .catch(error => console.log(error));
 }
 
