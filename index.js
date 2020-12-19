@@ -16,31 +16,36 @@ app.get('/', (req, res) => {
         res.render('index')
     } else if (accept === 'json') { 
         if (req.query.place) {
-            // Kalla på detta i frontend
-            let coords = apiController.getCoords(req.query.place);
+            apiController.getCoords(req.query.place).then(response => res.json(response))
         }
-        // locationtype 
-        let lat = req.query.lat;
-        let lng = req.query.lng;
-        goal = apiController.getData(lat, lng);
-        console.log(goal);
-        res.json(JSON.stringify(goal));
+        else {
+            let lat = req.query.lat;
+            let lng = req.query.lng;
+            goal = apiController.getData(lat, lng);
+            console.log(goal);
+            res.json(JSON.stringify(goal));
+        }
     } else {
         res.render('404')
     }
-    //testmetod för smhi.
-    
+
 })
 
-/*app.post('/', (req, res) => {
-    if (req.is('application/json')) {
-        console.log(req.body);
-        const coords = req.body;
-        apiController.getData(coords);
-        res.json(req.body);
-    }
-    });*/
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
+/*
+function getData(pos){
+    //window.location.search
+  $.ajax({
+    url: window.location.href,
+    async: false,
+    headers: {"Accept": "application/json"}
+  })
+  .done(function (data) { 
+      finalData = JSON.parse(data);
+  });
+
+}*/
