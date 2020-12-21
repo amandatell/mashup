@@ -1,6 +1,7 @@
 let map, infoWindow;
 let finalData;
 /// JUST NU HÄMTAR "GET_DATA" PLATSTJÄNST
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 55.893180, lng: 13.582728 }, 
@@ -21,9 +22,9 @@ function initMap() {
   document.getElementById('resList').style.visibility = "hidden";
 
   function showResults(results){
-    document.getElementById('divSubmit').style.visibility = "hidden";
+    document.getElementById('divSubmit').style.display = "none";
     document.getElementById('resList').style.visibility = "visible";
-    for(var i = 0; i < 10; i++){
+    for(var i = 0; i < 6; i++){
       let item = {};
       item.id = i;
       item.description = "Från Malmö C Plattform A till Vellinge C plattform B";
@@ -34,21 +35,21 @@ function initMap() {
   }
 
   function removeResults(){
-    document.getElementById('divSubmit').style.visibility = "visible";
+    document.getElementById('divSubmit').style.display = "block";
     document.getElementById('resList').style.visibility = "hidden";
   }
 
   function addItemToAccordion(item){
     $('#accordion').append(
     `
-    <div class="card-header" id="heading_${item.id}">
+    <div class="card-header" id="heading_${item.id}"  style="background-color:#ffffff;">
       <h5 class="mb-0"></h5>
-      <button class="btn" data-toggle="collapse" data-target="#collapse_${item.id}" 
+      <button class="accordion-button collapsed" data-toggle="collapse" data-target="#collapse_${item.id}" 
         aria-expanded="false" aria-controls="collapse_${item.id}">${item.title}</button>
         </div>
         <div class="collapse" id="collapse_${item.id}" aria-labelledby="heading_${item.id}" 
         data-parent="#accordion" vertical-allign="middle">
-          <div class="card-body"></div>${item.description}
+          <div class="card-body"><p id= "cardBodyP">${item.description}</p></div>
     </div>
     `
     );

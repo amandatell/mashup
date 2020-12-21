@@ -30,13 +30,13 @@ html
                            .row
                            .input-group.input-group-lg                  
                               input.form-control(type='text' placeholder='Skriv in plats ' name = 'place')
-                              button.btn.btn-primary(type='submit')  Sök
+                              button.btn.btn-primary(type='submit' id= 'customLocationBtn')  Sök
                      .row
                         p4 Eller använd din nuvarande position
                      button.btn.btn-primary.get_data(type='button') Hämta
                
                .divResList(id = 'resList')
-                  #accordion
+                  #accordion.accordion
             
                  
                   //p.bus Det är finast väder i <placeholder> och du tar dig dit genom xxxxx.   
