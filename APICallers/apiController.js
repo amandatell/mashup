@@ -1,4 +1,8 @@
 const smhi = require('./smhi');
+const TrafikLab = require ('./TrafikLab')
+const promise = require('promise')
+const axios = require('axios')
+const https = require('https')
 
 function cacheData() {
     smhi.init()
@@ -20,4 +24,19 @@ function getData(lat, lng) {
     // return transport
 }
 
-module.exports= {cacheData, getData}
+function getCoords(cityName){
+    const x = 0
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
+    .then(response => {
+        try {
+            var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
+            return data;
+        } catch(e){
+            if (e instanceof TypeError) {
+                return null;
+        }
+    }})
+    .catch(error => console.log(error));
+}
+
+module.exports= {cacheData, getData, getCoords}
