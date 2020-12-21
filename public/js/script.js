@@ -20,16 +20,51 @@ function initMap() {
 
   document.getElementById('resList').style.visibility = "hidden";
 
-  function showResults(){
-    console.log("CLICK!");
+  function showResults(results){
     document.getElementById('divSubmit').style.visibility = "hidden";
     document.getElementById('resList').style.visibility = "visible";
+    for(var i = 0; i < 10; i++){
+      let item = {};
+      item.id = i;
+      item.description = "Från Malmö C Plattform A till Vellinge C plattform B";
+      item.title = "Malmö -> Vellinge";
+      addItemToAccordion(item);
+    }
+    
   }
 
   function removeResults(){
     document.getElementById('divSubmit').style.visibility = "visible";
     document.getElementById('resList').style.visibility = "hidden";
   }
+
+  function addItemToAccordion(item){
+    $('#accordion').append(
+    `
+    <div class="card-header" id="heading_${item.id}">
+      <h5 class="mb-0"></h5>
+      <button class="btn" data-toggle="collapse" data-target="#collapse_${item.id}" 
+        aria-expanded="false" aria-controls="collapse_${item.id}">${item.title}</button>
+        </div>
+        <div class="collapse" id="collapse_${item.id}" aria-labelledby="heading_${item.id}" 
+        data-parent="#accordion" vertical-allign="middle">
+          <div class="card-body"></div>${item.description}
+    </div>
+    `
+    );
+    /*
+    $('#accordion').append(`
+    <div class="collapse show" id="accItem_${item.id}" aria-labelledby="headingOne"  
+    data-parent="#accordion" style="">
+      <div class="card-body">
+      </div> ${item.description} </div>
+      <div class="card-header" id="headingOne"><h5 class="mb-0">
+        </h5><button class="btn" data-toggle="collapse" data-target="#accItem_${item.id}" 
+    aria-expanded="false" aria-controls="accItem${item.id}">${item.title}</button></div>`)
+
+    */
+  }
+
 
   document.querySelector('.get_data').addEventListener("click", () => {
     // Try HTML5 geolocation.
