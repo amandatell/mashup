@@ -57,5 +57,29 @@ function removeUmlaut(placeName){
     return place;
 }
 
-module.exports= {cacheData, getData, getCoords, removeUmlaut}
+function runTrafikLab(startLat, startLon, destLat, destLon) {
+    //trafiklab.getRoute(55.594034, 12.966149, 55.704933, 13.204917, trafikCallback);
+    trafiklab.getRoute(startLat, startLon, destLat, destLon, trafikCallback)
+}
+
+function trafikCallback(data) {
+    var i = 0;
+    data.forEach(routeSegm => {
+        var typ;
+        if (routeSegm.type == null) {
+            typ = 'gång'
+        } else {
+            typ = routeSegm.type;
+        }
+        console.log('Sträcka ' + ++i + ' från ' + routeSegm.startName + ' till ' + routeSegm.destName + ' av typ ' + typ )
+        if (routeSegm.stops.length > 0) {
+            console.log('Stopp:');
+            routeSegm.stops.forEach(stop => {
+                console.log('* ' + stop.name + ' (Long: ' + stop.lon + ' / Lat: ' + stop.lat + ')');
+            })
+        }
+    })
+}
+
+module.exports= {cacheData, getData, getCoords, removeUmlaut, runTrafikLab}
 
