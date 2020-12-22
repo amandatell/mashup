@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
     if (accept === 'html') {
         
         res.render('index')
+
     } else if (accept === 'json') { 
         if (req.query.place) {
             let place = apiController.removeUmlaut(req.query.place);
@@ -40,7 +41,6 @@ app.get('/', (req, res) => {
     } else {
         res.render('404')
     }
-
 })
 
 
