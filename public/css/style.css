@@ -25,6 +25,15 @@
     padding-top: 1.5vh;
 }
 
+.card-header{
+    padding: 0 !important;
+}
+
+#cardBodyP{
+    margin-top: 1rem !important;
+}
+
+
 /*#locationButton {
     height: 70vh;
     width: 110vh;
