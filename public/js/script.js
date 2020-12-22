@@ -114,6 +114,27 @@ function markMap(){
     position: finalData.goal,
     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
   });
+
+  var origin = new google.maps.LatLng(finalData.start);
+  var destination = new google.maps.LatLng(finalData.goal);
+  //var waypoints = finalData.transport
+  //console.log(waypoints)
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map)
+  var request = {
+    origin: origin,
+    destination: destination,
+    travelMode: 'DRIVING'
+    //waypoints: waypoints
+  }
+  directionsService.route(request, function(response, status) {
+    if (status == 'OK') {
+      console.log("directions:", response)
+      directionsRenderer.setDirections(response);
+    }
+  });
+  directionsRenderer.setMap(map)
   //startMarker.setMap(map);
   markers.push(startMarker)
   //markers.setMap(map);
