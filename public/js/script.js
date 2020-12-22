@@ -1,6 +1,6 @@
 let map, infoWindow;
 let finalData;
-/// JUST NU HÄMTAR "GET_DATA" PLATSTJÄNST
+var markers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -8,9 +8,6 @@ function initMap() {
     zoom: 8,
   });
   infoWindow = new google.maps.InfoWindow();
-
-  
-
   document.getElementById('test').addEventListener("click", () => {
     showResults();
   })
@@ -53,6 +50,7 @@ function initMap() {
     </div>
     `
     );
+    
     /*
     $('#accordion').append(`
     <div class="collapse show" id="accItem_${item.id}" aria-labelledby="headingOne"  
@@ -67,6 +65,7 @@ function initMap() {
   }
 
 
+
   document.querySelector('.get_data').addEventListener("click", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -79,22 +78,7 @@ function initMap() {
           
           // To add the marker to the map, call setMap();
           getData(pos);
-          console.log(finalData)
-          var startMarker = new google.maps.Marker({
-            position: finalData.start,
-            label: { color: '#ffffff', fontWeight: 'bold', fontSize: '12px', text: 'Du' }
-          });
-          var goalMarker = new google.maps.Marker({
-            position: finalData.goal,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-          });
-          startMarker.setMap(map);
-          goalMarker.setMap(map);
-          infoWindow.open(map);
-          let center = {lat: (finalData.start.lat + finalData.goal.lat) / 2, lng: (finalData.start.lng + finalData.goal.lng) / 2}
-          console.log(center)
-          map.setCenter(center);
-          map.setZoom(10);
+          markMap();
           
         },
         () => {
@@ -116,6 +100,47 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
+
+}
+
+function markMap(){
+  markers.forEach(marker => marker.setMap(null));
+  markers.length = 0;
+  var startMarker = new google.maps.Marker({
+    position: finalData.start,
+    label: { color: '#ffffff', fontWeight: 'bold', fontSize: '12px', text: 'Du' }
+  });
+  var goalMarker = new google.maps.Marker({
+    position: finalData.goal,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  });
+  //startMarker.setMap(map);
+  markers.push(startMarker)
+  //markers.setMap(map);
+  markers.push(goalMarker);
+  markers.forEach(marker => marker.setMap(map));
+  infoWindow.open(map);
+  let center = {lat: (finalData.start.lat + finalData.goal.lat) / 2, lng: (finalData.start.lng + finalData.goal.lng) / 2}
+  console.log(center)
+  map.setCenter(center);
+  map.setZoom(10);
+}
+
+document.querySelector('.getPlace').addEventListener("click", () => {
+  let place = $('#place').val();
+  getDataPlace(place);
+  markMap();  
+});
+
+function getDataPlace(place){
+  $.ajax({
+    url: 'http://localhost:3000/?place=' + place,
+    async: false,
+    headers: {"Accept": "application/json"}
+  })
+  .done(function (data) { 
+      finalData = data;
+  });
 
 }
 

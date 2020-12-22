@@ -25,12 +25,11 @@ html
                   .divSubmit(id = 'divSubmit')
                      h4 Åk dit det finaste vädret är! 
                      .container
-                        form(method= 'get')
                            label(for="location") Sök efter din plats  
                            .row
-                           .input-group.input-group-lg                  
-                              input.form-control(type='text' placeholder='Skriv in plats ' name = 'place')
-                              button.btn.btn-primary(type='submit' id= 'customLocationBtn')  Sök
+                              .input-group.input-group-lg                  
+                                 input.form-control(type='text' placeholder='Skriv in plats ' name = 'place' id='place')
+                                 button.btn.btn-primary.getPlace(id= 'customLocationBtn')  Sök
                      .row
                         p4 Eller använd din nuvarande position
                      button.btn.btn-primary.get_data(type='button') Hämta

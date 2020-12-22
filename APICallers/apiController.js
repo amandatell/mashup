@@ -26,10 +26,12 @@ function getData(lat, lng) {
 
 function getCoords(cityName){
     const x = 0
+    console.log(cityName)
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
     .then(response => {
         try {
             var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
+            console.log(data);
             return data;
         } catch(e){
             if (e instanceof TypeError) {
@@ -39,4 +41,19 @@ function getCoords(cityName){
     .catch(error => console.log(error));
 }
 
-module.exports= {cacheData, getData, getCoords}
+function removeUmlaut(placeName){
+    var place = "";
+    for(let i = 0; i < placeName.length; i++){
+      let temp;
+      if(placeName[i] === 'å' ||  i === 'å')
+        temp = 'a';
+      else if(placeName[i] === 'ö')
+        temp = 'o';
+      else
+        temp = placeName[i];
+      place += temp;
+    }  
+    return place;
+}
+
+module.exports= {cacheData, getData, getCoords, removeUmlaut}
