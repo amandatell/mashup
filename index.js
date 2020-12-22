@@ -20,10 +20,12 @@ app.get('/', (req, res) => {
         goal = apiController.getData(lat, lng);
         console.log(goal);
         res.json(JSON.stringify(goal));
+
     } else {
         res.render('404')
     }
     //testmetod för smhi.
+
     
 })
 
