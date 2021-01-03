@@ -3,12 +3,13 @@ const trafiklab = require('./TrafikLab');
 const promise = require('promise')
 const axios = require('axios')
 const https = require('https')
+var routeData;
 
 function cacheData() {
     smhi.init()
 }
 
-function getData(lat, lng) {
+async function getData(lat, lng) {
     let data;
     console.log(lat, lng);
     let goal = smhi.getBestWeather(lat, lng);
@@ -21,6 +22,10 @@ function getData(lat, lng) {
     // data = {start: {lat: parseFloat(lat), lng: parseFloat(lng)}, goal: {lat: goal.latitude, lng: goal.longitude}}
     data = {start: coords.start, goal: coords.goal, transport}
     console.log(data)
+
+    var trafik = await trafiklab.getRoute(coords.start.lat, coords.start.lng, coords.goal.lat, coords.goal.lng);
+    //var trafik = await trafiklab.getRoute(transport[0].lat, transport[0].lng, transport[1].lat, transport[1].lng);
+    console.log(trafik);
     return data;
     // return transport
 }
@@ -57,29 +62,5 @@ function removeUmlaut(placeName){
     return place;
 }
 
-function runTrafikLab(startLat, startLon, destLat, destLon) {
-    //trafiklab.getRoute(55.594034, 12.966149, 55.704933, 13.204917, trafikCallback);
-    trafiklab.getRoute(startLat, startLon, destLat, destLon, trafikCallback)
-}
-
-function trafikCallback(data) {
-    var i = 0;
-    data.forEach(routeSegm => {
-        var typ;
-        if (routeSegm.type == null) {
-            typ = 'gång'
-        } else {
-            typ = routeSegm.type;
-        }
-        console.log('Sträcka ' + ++i + ' från ' + routeSegm.startName + ' till ' + routeSegm.destName + ' av typ ' + typ )
-        if (routeSegm.stops.length > 0) {
-            console.log('Stopp:');
-            routeSegm.stops.forEach(stop => {
-                console.log('* ' + stop.name + ' (Long: ' + stop.lon + ' / Lat: ' + stop.lat + ')');
-            })
-        }
-    })
-}
-
-module.exports= {cacheData, getData, getCoords, removeUmlaut, runTrafikLab}
+module.exports= {cacheData, getData, getCoords, removeUmlaut}
 
