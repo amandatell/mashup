@@ -34,9 +34,12 @@ app.get('/', (req, res) => {
         else {
             let lat = req.query.lat;
             let lng = req.query.lng;
-            goal = apiController.getData(lat, lng);
-            console.log(goal);
-            res.json(goal);
+            goal = apiController.getData(lat, lng).then(response => {
+                res.json(response)
+                console.log('log1: ' + response)
+            });
+            //console.log(goal);
+            //res.json(goal);
         }
     } else {
         res.render('404')
