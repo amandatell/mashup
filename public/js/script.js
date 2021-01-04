@@ -104,15 +104,35 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function markMap(){
+  initMap();
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
   markers.forEach(marker => marker.setMap(null));
   markers.length = 0;
   var startMarker = new google.maps.Marker({
-    position: finalData.start,
-    label: { color: '#ffffff', fontWeight: 'bold', fontSize: '12px', text: 'Du' }
+    position: finalData.start
   });
   var goalMarker = new google.maps.Marker({
     position: finalData.goal,
     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  });
+
+  var origin = new google.maps.LatLng(finalData.start);
+  var destination = new google.maps.LatLng(finalData.goal);
+  //var waypoints = finalData.transport
+  //console.log(waypoints)
+  directionsRenderer.setMap(map)
+  var request = {
+    origin: origin,
+    destination: destination,
+    travelMode: 'DRIVING'
+    //waypoints: waypoints
+  }
+  directionsService.route(request, function(response, status) {
+    if (status == 'OK') {
+      console.log("directions:", response)
+      directionsRenderer.setDirections(response);
+    }
   });
   //startMarker.setMap(map);
   markers.push(startMarker)
