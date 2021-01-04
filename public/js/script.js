@@ -1,6 +1,10 @@
 let map, infoWindow;
 let finalData;
 /// JUST NU HÄMTAR "GET_DATA" PLATSTJÄNST
+function showErrorPopUp(){
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -9,7 +13,9 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
 
-  
+  document.getElementById('testPop').addEventListener("click", () =>{
+    showErrorPopUp();
+  })
 
   document.getElementById('test').addEventListener("click", () => {
     showResults();

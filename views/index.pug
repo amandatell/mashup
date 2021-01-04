@@ -18,6 +18,7 @@ html
          h1.text-center RUBRIK
          button.testBtn(type = 'button' name = 'refresh' id = 'test') Hide
          button.testBtn(type = 'button' name = 'refresh' id = 'test2') Restore
+         button.testBtn(type = 'button' name = 'popupt' id = 'testPop') popup
       .container
          .row
             .col-5.text-center
@@ -27,9 +28,14 @@ html
                      .container
                         form(method= 'get')
                            label(for="location") Sök efter din plats  
+                                     
+                              
                            .row
-                           .input-group.input-group-lg                  
+                           
+                           .input-group.input-group-lg   
                               input.form-control(type='text' placeholder='Skriv in plats ' name = 'place')
+                              .popup
+                                 span#myPopup.popuptext Ingen plats matchade din sökning
                               button.btn.btn-primary(type='submit' id= 'customLocationBtn')  Sök
                      .row
                         p4 Eller använd din nuvarande position
