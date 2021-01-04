@@ -40,15 +40,23 @@ function getCoords(cityName){
     //console.log(cityName)
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
     .then(response => {
-        try {
-            var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
-            console.log(data);
-            return data;
-        } catch(e){
-            if (e instanceof TypeError) {
-                return null;
+        //console.log("RESPONSE: ")
+        //console.log(response)
+        if(response.data.results != null){
+            try {
+                var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
+                console.log(data);
+                return data;
+            } catch(e){
+                if (e instanceof TypeError) {
+                    
+                    return "locNotFound";
+                }
+            }
+        } else{
+            console.log("HEJSAN!")
         }
-    }})
+    })
     .catch(error => console.log(error + "ASDASD------------------------------------------------------------------------------------------------------------------ASDASD"));
 }
 

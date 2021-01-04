@@ -24,10 +24,11 @@ app.get('/', (req, res) => {
             console.log(place)
             apiController.getCoords(place).then(response => {
                 if (response != null){
-                    console.log("RESPONSE SENT:")
-                    console.log(response)
-                    
+                    if(response != "locNotFound"){
+                        console.log("RESPONSE SENT:")
+                        console.log(response)   
                         res.json(response)
+                    } else res.sendStatus(404);
                 }
                     
                 else{
