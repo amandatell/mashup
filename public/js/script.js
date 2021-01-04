@@ -104,11 +104,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function markMap(){
+  initMap();
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
   markers.forEach(marker => marker.setMap(null));
   markers.length = 0;
   var startMarker = new google.maps.Marker({
-    position: finalData.start,
-    label: { color: '#ffffff', fontWeight: 'bold', fontSize: '12px', text: 'Du' }
+    position: finalData.start
   });
   var goalMarker = new google.maps.Marker({
     position: finalData.goal,
@@ -119,8 +121,6 @@ function markMap(){
   var destination = new google.maps.LatLng(finalData.goal);
   //var waypoints = finalData.transport
   //console.log(waypoints)
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map)
   var request = {
     origin: origin,
@@ -134,7 +134,6 @@ function markMap(){
       directionsRenderer.setDirections(response);
     }
   });
-  directionsRenderer.setMap(map)
   //startMarker.setMap(map);
   markers.push(startMarker)
   //markers.setMap(map);
