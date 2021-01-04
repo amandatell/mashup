@@ -11,7 +11,7 @@ function cacheData() {
 
 function getData(lat, lng) {
     let data;
-    console.log(lat, lng);
+    //console.log(lat, lng);
     let goal = smhi.getBestWeather(lat, lng);
     let coords = {start: {lat: parseFloat(lat), lng: parseFloat(lng)}, goal: {lat: goal.latitude, lng: goal.longitude}};
     //console.log(coords)
@@ -21,7 +21,9 @@ function getData(lat, lng) {
     
 
     return trafiklab.getRoute(coords.start.lat, coords.start.lng, coords.goal.lat, coords.goal.lng).then(function(trafik) {
-      data = {start: coords.start, goal: coords.goal, trafik}
+        if(trafik != null){
+            data = {start: coords.start, goal: coords.goal, trafik}
+        }
 
       return data;
       //console.log(trafik)
@@ -35,7 +37,7 @@ function getData(lat, lng) {
 
 function getCoords(cityName){
     const x = 0
-    console.log(cityName)
+    //console.log(cityName)
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
     .then(response => {
         try {
@@ -47,7 +49,7 @@ function getCoords(cityName){
                 return null;
         }
     }})
-    .catch(error => console.log(error));
+    .catch(error => console.log(error + "ASDASD------------------------------------------------------------------------------------------------------------------ASDASD"));
 }
 
 function removeUmlaut(placeName){
