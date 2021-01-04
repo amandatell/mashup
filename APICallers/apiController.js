@@ -54,10 +54,13 @@ function getCoords(cityName){
                 }
             }
         } else{
-            console.log("HEJSAN!")
+            return "locNotFound"
         }
     })
-    .catch(error => console.log(error + "ASDASD------------------------------------------------------------------------------------------------------------------ASDASD"));
+    .catch(error => { 
+        console.log(error)
+        return "locNotFound"
+    });
 }
 
 function removeUmlaut(placeName){

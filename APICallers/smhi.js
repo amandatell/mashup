@@ -2,7 +2,7 @@ const e = require('express');
 const cron = require('node-cron');
 
 https = require('https');
-const boxSize = 1;
+const boxSize = 2;
 var cloudDataCache;
 var tempDataCache;
 
