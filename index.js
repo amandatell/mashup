@@ -11,16 +11,22 @@ app.use(express.json());
 apiController.cacheData();
 
 app.get('/', (req, res) => {
-    console.log("Get");
-    console.log(req.query);
+    //console.log("Get");
+    //console.log(req.query);
     const accept = req.accepts(['html', 'json'])
     if (accept === 'html') {
+        
         res.render('index')
+
     } else if (accept === 'json') { 
         if (req.query.place) {
-            apiController.getCoords(req.query.place).then(response => {
-                if (response != null)
+            let place = apiController.removeUmlaut(req.query.place);
+            console.log(place)
+            apiController.getCoords(place).then(response => {
+                if (response != null){
                     res.json(response)
+                }
+                    
                 else
                     res.sendStatus(400);
         })
@@ -35,7 +41,6 @@ app.get('/', (req, res) => {
     } else {
         res.render('404')
     }
-
 })
 
 
@@ -46,13 +51,6 @@ app.listen(port, () => {
 /*
 function getData(pos){
     //window.location.search
-  $.ajax({
-    url: window.location.href,
-    async: false,
-    headers: {"Accept": "application/json"}
-  })
-  .done(function (data) { 
-      finalData = JSON.parse(data);
-  });
+  
 
 }*/

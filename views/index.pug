@@ -6,7 +6,7 @@ html
       meta(name="viewport", content="width=device-width, initial-scale=1.0")
       meta(http-equiv="X-UA-Compatible", content="ie=edge")
       link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous")
-      //script(src='jquery-3.5.1.min.js')  
+      //script(src='jquery-3.5.1.min.js')
       //script(src='//code.jquery.com/jquery-3.5.1.min.js')
       script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
       script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
@@ -24,15 +24,14 @@ html
             .col-5.text-center
                .aside
                   .divSubmit(id = 'divSubmit')
-                     h4 Åk dit det finaste vädret är! 
+                     h4 Åk dit det finaste vädret är!
                      .container
-                        form(method= 'get')
-                           label(for="location") Sök efter din plats  
-                                     
-                              
+                           label(for="location") Sök efter din plats
+
+
                            .row
-                           
-                           .input-group.input-group-lg   
+
+                           .input-group.input-group-lg
                               input.form-control(type='text' placeholder='Skriv in plats ' name = 'place')
                               .popup
                                  span#myPopup.popuptext Ingen plats matchade din sökning
@@ -40,12 +39,12 @@ html
                      .row
                         p4 Eller använd din nuvarande position
                      button.btn.btn-primary.get_data(type='button') Hämta
-               
+
                .divResList(id = 'resList')
                   #accordion.accordion
-            
-                 
-                  //p.bus Det är finast väder i <placeholder> och du tar dig dit genom xxxxx.   
+
+
+                  //p.bus Det är finast väder i <placeholder> och du tar dig dit genom xxxxx.
 
             .col-7
                #map
