@@ -1,4 +1,71 @@
 html
     head
         title Väderapp
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous")
+        script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
         
+        link(rel="stylesheet" href="/css/style.css")
+
+    body
+        .header
+            h1.text-center API-dokumentation
+        .container
+            .row
+                h4 Väderappen 
+            .row
+                p.lead Väderappen hjälper dig att hitta det bästa vädret i Sverige och visar hur du tar dig dit. Du kan anropa Väderappens API för att få informationen.
+        .container
+            .row
+                h4 Anrop
+            .row
+                p Du kan söka efter en väderresa med hjälp av din platsinformation eller med latitud- och longitudkoordinater. Data returneras i form av ett JSON-objekt.
+            
+            .row.mt-4
+                h5 Plats
+            .row
+                p Hämta en väderresa med hjälp av platsdata.
+            .row
+                dt.col-sm-1 Anrop:
+                dd.font-monospace.col-sm-2 GET
+            .row
+                dt.col-sm-1 Headers:
+                dd.font-monospace.col-sm-3 Accept: application/json
+            .row    
+                dt.col-sm-1 URL:
+                dd.font-monospace.col-sm-5 http://localhost:3000/?place=&lt;DINA PLATSDATA&gt;
+            .row
+                button.btn.btn-primary(data-toggle='collapse' data-target='#json-place').col-1 Exempel
+            .row      
+                #json-place.collapse.col-6
+                        .card.mt-3
+                            .card-body.font-monospace
+                                | Exempel av JSON-objekt för platsdata.
+            
+            .row
+                h5.mt-5 Koordinater
+            .row
+                p Hämta en väderresa med hjälp av koordinater.
+            .row
+                dt.col-sm-1 Anrop:
+                dd.font-monospace.col-sm-2 GET
+            .row
+                dt.col-sm-1 Headers:
+                dd.font-monospace.col-sm-3 Accept: application/json
+            .row    
+                dt.col-sm-1 URL:
+                dd.font-monospace.col-sm-5 http://localhost:3000/?lat=&lt;LATITUD&gt;&amp;lng=&lt;LONGITUD&gt;
+                
+            .row
+                button.btn.btn-primary(data-toggle='collapse' data-target='#json-coord').col-1 Exempel
+            .row        
+                #json-coord.collapse.col-6
+                        .card.mt-3
+                            .card-body.font-monospace
+                                | Exempel av JSON-objekt för koordinater.
+
+
