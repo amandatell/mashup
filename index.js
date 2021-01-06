@@ -43,6 +43,13 @@ app.get('/', (req, res) => {
     }
 })
 
+app.get('/api', (req, res) => {
+    const accept = req.accepts('html')
+    if (accept === 'html') {
+        res.render('api')
+    }
+})
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
