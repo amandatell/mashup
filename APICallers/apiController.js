@@ -38,7 +38,7 @@ function getData(lat, lng) {
 function getCoords(cityName){
     const x = 0
     //console.log(cityName)
-    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&region=se&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
     .then(response => {
         try {
             var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
