@@ -160,6 +160,7 @@ function getDataPlace(place){
   })
   .done(function (data) { 
       finalData = data;
+      console.log(finalData)
   });
 
 }
