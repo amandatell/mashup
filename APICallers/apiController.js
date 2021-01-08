@@ -11,14 +11,8 @@ function cacheData() {
 
 function getData(lat, lng) {
     let data;
-    //console.log(lat, lng);
     let goal = smhi.getBestWeather(lat, lng);
     let coords = {start: {lat: parseFloat(lat), lng: parseFloat(lng)}, goal: {lat: goal.latitude, lng: goal.longitude}};
-    //console.log(coords)
-
-    // let transport = xxx.xxx(lat: parseFloat(lat), lng: parseFloat(lng), lat: goal.latitude, lng: goal.longitude)
-    // data = {start: {lat: parseFloat(lat), lng: parseFloat(lng)}, goal: {lat: goal.latitude, lng: goal.longitude}}
-
 
     return trafiklab.getRoute(coords.start.lat, coords.start.lng, coords.goal.lat, coords.goal.lng).then(function(trafik) {
         if(trafik != null){
@@ -28,11 +22,6 @@ function getData(lat, lng) {
       return data;
       //console.log(trafik)
     });
-
-    //console.log(data);
-    //var trafik = await trafiklab.getRoute(transport[0].lat, transport[0].lng, transport[1].lat, transport[1].lng);
-
-    // return transport
 }
 
 function getCoords(cityName){
