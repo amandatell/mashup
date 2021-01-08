@@ -1,11 +1,17 @@
+
+
 let map, infoWindow;
 let finalData;
 var markers = [];
 
+$( document ).ready(function() {
+  document.getElementById('resList').style.visibility = "hidden";
+});
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 55.893180, lng: 13.582728 }, 
-    zoom: 8,
+    center: { lat: 59.622689, lng: 14.429024 }, 
+    zoom: 5,
   });
   infoWindow = new google.maps.InfoWindow();
   document.getElementById('test').addEventListener("click", () => {
@@ -16,40 +22,9 @@ function initMap() {
     removeResults();
   })
 
-  document.getElementById('resList').style.visibility = "hidden";
+  
 
-  function showResults(results){
-    document.getElementById('divSubmit').style.display = "none";
-    document.getElementById('resList').style.visibility = "visible";
-    for(var i = 0; i < 6; i++){
-      let item = {};
-      item.id = i;
-      item.description = "Från Malmö C Plattform A till Vellinge C plattform B";
-      item.title = "Malmö -> Vellinge";
-      addItemToAccordion(item);
-    }
-    
-  }
 
-  function removeResults(){
-    document.getElementById('divSubmit').style.display = "block";
-    document.getElementById('resList').style.visibility = "hidden";
-  }
-
-  function addItemToAccordion(item){
-    $('#accordion').append(
-    `
-    <div class="card-header" id="heading_${item.id}"  style="background-color:#ffffff;">
-      <h5 class="mb-0"></h5>
-      <button class="accordion-button collapsed" data-toggle="collapse" data-target="#collapse_${item.id}" 
-        aria-expanded="false" aria-controls="collapse_${item.id}">${item.title}</button>
-        </div>
-        <div class="collapse" id="collapse_${item.id}" aria-labelledby="heading_${item.id}" 
-        data-parent="#accordion" vertical-allign="middle">
-          <div class="card-body"><p id= "cardBodyP">${item.description}</p></div>
-    </div>
-    `
-    );
     
     /*
     $('#accordion').append(`
@@ -64,7 +39,41 @@ function initMap() {
     */
   }
 
+function showResults(results){
+  document.getElementById('divSubmit').style.display = "none";
+  document.getElementById('resList').style.visibility = "visible";
+  for(var i = 0; i < 6; i++){
+    let item = {};
+    item.id = i;
+    item.description = "Från Malmö C Plattform A till Vellinge C plattform B";
+    item.title = "Malmö -> Vellinge";
+    addItemToAccordion(item);
+  }
+  
+}
 
+function removeResults(){
+  document.getElementById('divSubmit').style.display = "block";
+  document.getElementById('resList').style.visibility = "hidden";
+}
+
+function addItemToAccordion(item){
+  $('#accordion').append(
+  `
+  <div class="card-header" id="heading_${item.id}"  style="background-color:#ffffff;">
+    <h5 class="mb-0"></h5>
+    <button class="accordion-button collapsed" data-toggle="collapse" data-target="#collapse_${item.id}" 
+      aria-expanded="false" aria-controls="collapse_${item.id}">${item.title}</button>
+      </div>
+      <div class="collapse" id="collapse_${item.id}" aria-labelledby="heading_${item.id}" 
+      data-parent="#accordion" vertical-allign="middle">
+        <div class="card-body"><p id= "cardBodyP">${item.description}</p></div>
+  </div>
+  `
+    );
+    console.log('appended')
+
+  }
 
   document.querySelector('.get_data').addEventListener("click", () => {
     // Try HTML5 geolocation.
@@ -90,7 +99,7 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-}
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
@@ -156,10 +165,16 @@ function getDataPlace(place){
   $.ajax({
     url: 'http://localhost:3000/?place=' + place,
     async: false,
-    headers: {"Accept": "application/json"}
+    headers: {"Accept": "application/json"},
+    error: function (request) {
+      console.log(arguments)
+      error(arguments);
+  },
   })
   .done(function (data) { 
       finalData = data;
+      console.log(finalData)
+      showResults();
   });
 
 }
@@ -168,10 +183,19 @@ function getData(pos){
   $.ajax({
     url: 'http://localhost:3000/?lat= '+ pos.lat + '&lng=' + pos.lng,
     async: false,
-    headers: {"Accept": "application/json"}
+    headers: {"Accept": "application/json"},
+    error: function (request) {
+      console.log(arguments)
+      error(arguments);
+    },
   })
   .done(function (data) { 
       finalData = data;
+      showResults();
   });
 
+}
+
+function error(arguments){
+  swal (JSON.stringify(arguments[0].responseJSON.statusCode), arguments[0].responseJSON.error ,  "error" )
 }

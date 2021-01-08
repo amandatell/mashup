@@ -28,11 +28,17 @@ app.get('/', (req, res) => {
                         console.log("RESPONSE SENT:")
                         console.log(response)   
                         res.json(response)
-                    } else res.sendStatus(404);
+                    } else res.status(400).send({
+                        error: 'Ingen plats hittades. Var god och kolla stavningen.',
+                        statusCode: 400
+                    });;
                 }
                     
                 else{
-                    res.sendStatus(400);
+                    res.status(404).send({
+                        error: 'Ingen kollektivtrafik hittades. Var god och byt startpunkt.',
+                        statusCode: 404
+                    });
                     console.log("SENT ERROR STATUS");
                 }
         })
