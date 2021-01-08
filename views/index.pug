@@ -15,7 +15,8 @@ html
       link(rel="stylesheet" href="/css/style.css")
    body
       .header
-         h1.text-center Solresan
+         h1.text-center 
+            a.titel(href='/') Solresan
          button.testBtn(type = 'button' name = 'refresh' id = 'test') Hide
          button.testBtn(type = 'button' name = 'refresh' id = 'test2') Restore
       .container
@@ -49,7 +50,8 @@ html
             .col-7
                #map
       .footer.fixed-footer
-         p.text-center Copyright
+         p.text-center 
+            a(href='/api') API-dokumentation
 
 
       script(src='https://code.jquery.com/jquery-3.5.1.js' integrity='sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=' crossorigin='anonymous')
