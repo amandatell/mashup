@@ -407,6 +407,46 @@ html
                                         }
                                         ]
                                     }
+        .container
+            .row
+                h4 JSON
+                p JSON-objekten är uppdelade i tre segment: ett start-objekt, ett goal-objekt och ett trafik-objekt
+                p Start-objektet visar koordinaterna för solresans början. Goal-objektet visar koordinaterna för resans slutdestination.
+                p Trafik-objektet innehåller flera delar:
+            br
+            .row
+                dt.font-monospace.col-sm-1 startName:
+                dd.col-sm-2 Namnet på startplatsen för delsegmentet.
+            .row
+                dt.font-monospace.col-sm-1 destName:
+                dd.col-sm-2 Namnet på destinationsplatsen för delsegmentet.
+            .row    
+                dt.font-monospace.col-sm-1 startLon:
+                dd.col-sm-2 Longitud för startplatsen.
+            .row
+                dt.font-monospace.col-sm-1 startLat:
+                dd.col-sm-2 Latitud för startplatsen.
+            .row
+                dt.font-monospace.col-sm-1 destLon:
+                dd.col-sm-2 Longitud för destinationen.
+            .row    
+                dt.font-monospace.col-sm-1 destLat:
+                dd.col-sm-2 Latitud för destinationen.
+            .row
+                dt.font-monospace.col-sm-1 stops:
+                dd.col-sm-2 En array av koordinater för eventuella stopp som färdmedlet gör på vägen. Innehåller stoppnamn, longitud och latitud.
+            .row    
+                dt.font-monospace.col-sm-1 type:
+                dd.col-sm-2 Vilken typ av färdmedel delsegmentet använder.
 
+        .container
+            .row
+                h4 Statuskoder
+            .row    
+                dt.font-monospace.col-sm-1 400:
+                dd.col-sm-2 Ingen plats hittades. Var god kontrollera stavningen.
+            .row    
+                dt.font-monospace.col-sm-1 404:
+                dd.col-sm-2 Ingen kollektivtrafik hittades. Var god och byt startpunkt.    
 
 

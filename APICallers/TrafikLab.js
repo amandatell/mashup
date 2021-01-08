@@ -25,6 +25,9 @@ function getRoute(startLat, startLon, destLat, destLon) {
                         //Destination coordinates
                         destLon: element.Destination.lon,
                         destLat: element.Destination.lat,
+
+                        startTime: element.Origin.time,
+                        destTime: element.Destination.time,
         
                         //Stops on the way, e.g. bus stops. If array length == 0, there are no stops...
                         stops: []
