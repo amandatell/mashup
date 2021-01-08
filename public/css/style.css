@@ -4,6 +4,14 @@
     box-shadow: 0 10px 10px -10px #bebebe80;
 }
 
+h4 {
+    margin-top: 3vh;
+    margin-bottom: 4vh;
+}
+
+.search {
+    margin-top: 11vh;
+}
 .container {
     margin: 1% auto auto 1%;
     padding-bottom: 2vh;

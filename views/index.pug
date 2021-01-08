@@ -1,7 +1,7 @@
 doctype html
 html
    head
-      title Väderapp
+      title Solresan
       meta(charset="UTF-8")
       meta(name="viewport", content="width=device-width, initial-scale=1.0")
       meta(http-equiv="X-UA-Compatible", content="ie=edge")
@@ -15,7 +15,7 @@ html
       link(rel="stylesheet" href="/css/style.css")
    body
       .header
-         h1.text-center RUBRIK
+         h1.text-center Solresan
          button.testBtn(type = 'button' name = 'refresh' id = 'test') Hide
          button.testBtn(type = 'button' name = 'refresh' id = 'test2') Restore
       .container
@@ -24,16 +24,22 @@ html
                .aside
                   .divSubmit(id = 'divSubmit')
                      h4 Åk dit det finaste vädret är! 
-                     .container
-                           label(for="location") Sök efter din plats  
-                           .row
-                              .input-group.input-group-lg                  
-                                 input.form-control(type='text' placeholder='Skriv in plats ' name = 'place' id='place')
-                                 button.btn.btn-primary.getPlace(id= 'customLocationBtn')  Sök
-                     .row
-                        p4 Eller använd din nuvarande position
-                     button.btn.btn-primary.get_data(type='button') Hämta
-               
+                     
+                     p Solresan hjälper dig hitta det finaste vädret i din närhet. blabsdlabdlsbdlabbalbllbal
+                     p Trcyk på knapp nedan , jdkjadksjdksajksjdkadja
+                  
+                     
+                     .search
+                        .container
+                              label(for="location") Sök efter din plats  
+                              .row
+                                 .input-group.input-group-lg                  
+                                    input.form-control(type='text' placeholder='Skriv in plats ' name = 'place' id='place')
+                                    button.btn.btn-primary.getPlace(id= 'customLocationBtn')  Sök
+                        .row
+                           p Eller använd din nuvarande position 
+                        button.btn.btn-primary.get_data(type='button') Hämta
+                  
                .divResList(id = 'resList')
                   #accordion.accordion
             
