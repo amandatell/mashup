@@ -26,19 +26,30 @@ function getData(lat, lng) {
 
 function getCoords(cityName){
     const x = 0
-    //console.log(cityName)
-    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&region=se&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + cityName + '&region=se&components=country:SE&key=AIzaSyA-2b37L9ktBGKwKoZ46ZWl3x6md9xiBSI')
     .then(response => {
-        try {
-            var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng); 
-            console.log(data);
-            return data;
-        } catch(e){
-            if (e instanceof TypeError) {
-                return null;
-           }
-    }})
-    .catch(error => {return '500'});
+        console.log("RESPONSE: ")
+        console.log(response.data.results)
+        if(response.data.results != null){
+            try {
+                var data = getData(response.data.results[x].geometry.location.lat, response.data.results[x].geometry.location.lng);
+                console.log(data);
+                return data;
+            } catch(e){
+                if (e instanceof TypeError) {
+                    console.log('stavfel')
+                    return "locNotFound";
+                }
+            }
+        }/* else{
+            console.log('ingen kollektiv')
+            return "locNotFound"
+        }*/
+      })
+    .catch(error => { 
+      console.log(error)
+        return null
+    });
 }
 
 function removeUmlaut(placeName){
@@ -47,14 +58,15 @@ function removeUmlaut(placeName){
       let temp;
       if(placeName[i] === 'å' ||  i === 'å')
         temp = 'a';
+        else if(placeName[i] === 'ä' ||  i === 'ä')
+        temp = 'a';
       else if(placeName[i] === 'ö')
         temp = 'o';
       else
         temp = placeName[i];
       place += temp;
-    }  
+    }
     return place;
 }
 
 module.exports= {cacheData, getData, getCoords, removeUmlaut}
-

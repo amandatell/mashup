@@ -50,8 +50,8 @@ function getRoute(startLat, startLon, destLat, destLon) {
                 console.log('Trafiklab: Parsing done!')
                 resolve(route)
             }).catch(error => {
-                console.log(error)
-                resolve(null);
+                //console.log(error)
+                reject(null);
                 return null;
             });
     });
