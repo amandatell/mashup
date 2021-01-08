@@ -151,14 +151,22 @@ function markMap(){
 
   var origin = new google.maps.LatLng(finalData.start);
   var destination = new google.maps.LatLng(finalData.goal);
-  //var waypoints = finalData.transport
-  //console.log(waypoints)
+  var waypointsstop = []
+  for (let i = 0; i < finalData.trafik.length ; i++) {
+    var stops = new google.maps.LatLng({lat: finalData.trafik[i].destLat, lng: finalData.trafik[i].destLon})
+    console.log(finalData.trafik[i])
+    waypointsstop.push({
+      location: stops,
+      stopover: true,
+    });
+  }
+  console.log(waypointsstop)
   directionsRenderer.setMap(map)
   var request = {
     origin: origin,
     destination: destination,
-    travelMode: 'DRIVING'
-    //waypoints: waypoints
+    travelMode: 'WALKING',
+    waypoints: waypointsstop
   }
   directionsService.route(request, function(response, status) {
     if (status == 'OK') {
