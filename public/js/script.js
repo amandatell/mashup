@@ -71,7 +71,6 @@ function addItemToAccordion(item){
   </div>
   `
     );
-    console.log('appended')
 
   }
 
@@ -191,6 +190,7 @@ function getData(pos){
   })
   .done(function (data) { 
       finalData = data;
+      console.log(finalData)
       showResults();
   });
 
