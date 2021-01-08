@@ -18,7 +18,7 @@ function initMap() {
     showResults();
   })
 
-  document.getElementById('test2').addEventListener("click", () => {
+  document.getElementById('restore').addEventListener("click", () => {
     removeResults();
   })
 
@@ -39,14 +39,31 @@ function initMap() {
     */
   }
 
+  
 function showResults(results){
+  clearAccordion();
   document.getElementById('divSubmit').style.display = "none";
   document.getElementById('resList').style.visibility = "visible";
-  for(var i = 0; i < 6; i++){
+  for(var i = 1; i < results.trafik.length -1; i++){
+
     let item = {};
     item.id = i;
-    item.description = "Från Malmö C Plattform A till Vellinge C plattform B";
-    item.title = "Malmö -> Vellinge";
+    let leg = results.trafik[i];
+    let stops = leg.stops.length;
+    let startTime = "<b>" + leg.startTime.substring(0, 5) +  "</b>" + " - ";
+    
+    item.description = "Resa från <b>" + leg.startName + "</b>, till <b>" + leg.destName + "</b>";
+    if(leg.type != null){
+      item.type = leg.type;
+    } else{
+      item.type = "Inget angett färdsätt."
+    }
+    
+      item.stops = stops ; 
+    
+    
+    console.log(item.description);
+    item.title = startTime  + leg.startName + " -> " + leg.destName;
     addItemToAccordion(item);
   }
   
@@ -55,6 +72,10 @@ function showResults(results){
 function removeResults(){
   document.getElementById('divSubmit').style.display = "block";
   document.getElementById('resList').style.visibility = "hidden";
+}
+
+function clearAccordion(){
+  $('#accordion').html("");
 }
 
 function addItemToAccordion(item){
@@ -67,7 +88,10 @@ function addItemToAccordion(item){
       </div>
       <div class="collapse" id="collapse_${item.id}" aria-labelledby="heading_${item.id}" 
       data-parent="#accordion" vertical-allign="middle">
-        <div class="card-body"><p id= "cardBodyP">${item.description}</p></div>
+        <div class="card-body"><p id= "cardBodyP">${item.description}
+        <p><b>Färdsätt:</b> ${item.type} - <b>Antal stop: </b> ${item.stops}</p>
+        
+        </p></div>
   </div>
   `
     );
@@ -173,7 +197,7 @@ function getDataPlace(place){
   .done(function (data) { 
       finalData = data;
       console.log(finalData)
-      showResults();
+      showResults(finalData);
   });
 
 }
@@ -191,7 +215,7 @@ function getData(pos){
   .done(function (data) { 
       finalData = data;
       console.log(finalData)
-      showResults();
+      showResults(finalData);
   });
 
 }

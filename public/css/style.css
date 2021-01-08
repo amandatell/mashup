@@ -46,6 +46,10 @@ a {
     color:rgb(65, 65, 65);
 }
 
+#restore {
+    margin-top: 3vh;
+}
+
 /*#locationButton {
     height: 70vh;
     width: 110vh;
