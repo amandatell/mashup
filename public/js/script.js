@@ -14,13 +14,7 @@ function initMap() {
     zoom: 5,
   });
   infoWindow = new google.maps.InfoWindow();
-  document.getElementById('test').addEventListener("click", () => {
-    showResults();
-  })
 
-  document.getElementById('restore').addEventListener("click", () => {
-    removeResults();
-  })
 
   
 
