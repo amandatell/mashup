@@ -50,6 +50,17 @@ a {
     margin-top: 3vh;
 }
 
+.wrapper {
+    border-radius: 15px;
+    box-shadow: 0 0 3px rgb(226, 226, 226);
+   
+    margin: 2vh;
+}
+
+#APIdoc {
+    margin-top: 4vh;
+}
+
 /*#locationButton {
     height: 70vh;
     width: 110vh;
