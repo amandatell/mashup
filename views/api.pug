@@ -32,241 +32,253 @@ html
                 .row
                     p Hämta en solresa med hjälp av angiven plats.
                 .row
-                    dt.col-sm-1 Anrop:
+                    dt.col-sm-1 Metod:
                     dd.font-monospace.col-sm-2 GET
                 .row
                     dt.col-sm-1 Headers:
                     dd.font-monospace.col-sm-3 Accept: application/json
                 .row    
+                    dt.col-sm-1 Parameter:
+                    dd.font-monospace.col-sm-5 place
+                .row
                     dt.col-sm-1 URL:
-                    dd.font-monospace.col-sm-5 http://localhost:3000/?place=&lt;PLATS&gt;
+                    dd.font-monospace.col-sm-5 http://localhost:3000/?place=&lt;PLATS&gt
                 .row
                     button.btn.btn-primary(data-toggle='collapse' data-target='#json-place').col-1 Exempel
                 .row      
                     #json-place.collapse.col-6
                             .card.mt-3
                                 .card-body
-                                            | Sökparameter "http://localhost:3000/?place=malmö" kan ge följande svar: 
-                                            .font-monospace
-                                            pre.
+                                    | Anrop
+                                    .font-monospace
+                                        pre.
+                                            $.ajax({
+                                                url: 'http://localhost:3000/?place=' + place,
+                                                async: false,
+                                                headers: {"Accept": "application/json"},
+                                            });
+                                    | Svar
+ 
+                                    .font-monospace
+                                        pre.
+                                            {
+                                                "start": {
+                                                "lat": 55.57905340000001,
+                                                "lng": 13.0108705
+                                                },
+                                                "goal": {
+                                                "lat": 55.489,
+                                                "lng": 14.3144
+                                                },
+                                                "trafik": [
                                                 {
-                                                    "start": {
-                                                    "lat": 55.57905340000001,
-                                                    "lng": 13.0108705
-                                                    },
-                                                    "goal": {
-                                                    "lat": 55.489,
-                                                    "lng": 14.3144
-                                                    },
-                                                    "trafik": [
+                                                    "startName": "55.579053, 13.010870",
+                                                    "destName": "Malmö Fosievägen",
+                                                    "startLon": 13.01087,
+                                                    "startLat": 55.579054,
+                                                    "destLon": 13.006951,
+                                                    "destLat": 55.578479,
+                                                    "stops": []
+                                                },
+                                                {
+                                                    "startName": "Malmö Fosievägen",
+                                                    "destName": "Malmö Triangeln station",
+                                                    "startLon": 13.006951,
+                                                    "startLat": 55.578479,
+                                                    "destLon": 13.001467,
+                                                    "destLat": 55.593203,
+                                                    "stops": [
                                                     {
-                                                        "startName": "55.579053, 13.010870",
-                                                        "destName": "Malmö Fosievägen",
-                                                        "startLon": 13.01087,
-                                                        "startLat": 55.579054,
-                                                        "destLon": 13.006951,
-                                                        "destLat": 55.578479,
-                                                        "stops": []
-                                                    },
-                                                    {
-                                                        "startName": "Malmö Fosievägen",
-                                                        "destName": "Malmö Triangeln station",
-                                                        "startLon": 13.006951,
-                                                        "startLat": 55.578479,
-                                                        "destLon": 13.001467,
-                                                        "destLat": 55.593203,
-                                                        "stops": [
-                                                        {
-                                                            "name": "Malmö Fosievägen",
-                                                            "lon": 13.006951,
-                                                            "lat": 55.578479
-                                                        },
-                                                        {
-                                                            "name": "Malmö Mobilia",
-                                                            "lon": 13.002923,
-                                                            "lat": 55.58194
-                                                        },
-                                                        {
-                                                            "name": "Malmö Dalaplan",
-                                                            "lon": 13.006205,
-                                                            "lat": 55.586039
-                                                        },
-                                                        {
-                                                            "name": "Malmö Södervärn",
-                                                            "lon": 13.006933,
-                                                            "lat": 55.588682
-                                                        },
-                                                        {
-                                                            "name": "Malmö Tandvårdshögskolan",
-                                                            "lon": 13.001045,
-                                                            "lat": 55.590929
-                                                        },
-                                                        {
-                                                            "name": "Malmö Triangeln station",
-                                                            "lon": 13.001467,
-                                                            "lat": 55.593203
-                                                        }
-                                                        ],
-                                                        "type": "Länstrafik - Buss"
+                                                        "name": "Malmö Fosievägen",
+                                                        "lon": 13.006951,
+                                                        "lat": 55.578479
                                                     },
                                                     {
-                                                        "startName": "Malmö Triangeln station",
-                                                        "destName": "Simrishamn station",
-                                                        "startLon": 13.001467,
-                                                        "startLat": 55.593203,
-                                                        "destLon": 14.351944,
-                                                        "destLat": 55.554028,
-                                                        "stops": [
-                                                        {
-                                                            "name": "Malmö Triangeln station",
-                                                            "lon": 13.001467,
-                                                            "lat": 55.593203
-                                                        },
-                                                        {
-                                                            "name": "Malmö Hyllie station",
-                                                            "lon": 12.976927,
-                                                            "lat": 55.563152
-                                                        },
-                                                        {
-                                                            "name": "Oxie station (Malmö kn)",
-                                                            "lon": 13.096169,
-                                                            "lat": 55.541632
-                                                        },
-                                                        {
-                                                            "name": "Svedala station",
-                                                            "lon": 13.232409,
-                                                            "lat": 55.506871
-                                                        },
-                                                        {
-                                                            "name": "Skurup station",
-                                                            "lon": 13.500378,
-                                                            "lat": 55.480074
-                                                        },
-                                                        {
-                                                            "name": "Rydsgård station (Skurup kn)",
-                                                            "lon": 13.587492,
-                                                            "lat": 55.474231
-                                                        },
-                                                        {
-                                                            "name": "Svarte station (Ystad kn)",
-                                                            "lon": 13.717116,
-                                                            "lat": 55.428485
-                                                        },
-                                                        {
-                                                            "name": "Ystad station",
-                                                            "lon": 13.824574,
-                                                            "lat": 55.427316
-                                                        },
-                                                        {
-                                                            "name": "Köpingebro station (Ystad kn)",
-                                                            "lon": 13.935644,
-                                                            "lat": 55.457223
-                                                        },
-                                                        {
-                                                            "name": "Tomelilla station",
-                                                            "lon": 13.948939,
-                                                            "lat": 55.546549
-                                                        },
-                                                        {
-                                                            "name": "Lunnarp station (Tomelilla kn)",
-                                                            "lon": 14.041924,
-                                                            "lat": 55.541228
-                                                        },
-                                                        {
-                                                            "name": "Smedstorp station (Tomelilla kn)",
-                                                            "lon": 14.11755,
-                                                            "lat": 55.54957
-                                                        },
-                                                        {
-                                                            "name": "Gärsnäs station (Simrishamn kn)",
-                                                            "lon": 14.181023,
-                                                            "lat": 55.546513
-                                                        },
-                                                        {
-                                                            "name": "Simrishamn station",
-                                                            "lon": 14.351944,
-                                                            "lat": 55.554028
-                                                        }
-                                                        ],
-                                                        "type": "Länstrafik - Tåg"
+                                                        "name": "Malmö Mobilia",
+                                                        "lon": 13.002923,
+                                                        "lat": 55.58194
                                                     },
                                                     {
-                                                        "startName": "Simrishamn station",
-                                                        "destName": "Hammarlunda (Simrishamn kn)",
-                                                        "startLon": 14.351944,
-                                                        "startLat": 55.554028,
-                                                        "destLon": 14.308759,
-                                                        "destLat": 55.490699,
-                                                        "stops": [
-                                                        {
-                                                            "name": "Simrishamn station",
-                                                            "lon": 14.351944,
-                                                            "lat": 55.554028
-                                                        },
-                                                        {
-                                                            "name": "Simrishamn Annelundsvägen",
-                                                            "lon": 14.351836,
-                                                            "lat": 55.545533
-                                                        },
-                                                        {
-                                                            "name": "Frägård (Simrishamn kn)",
-                                                            "lon": 14.348582,
-                                                            "lat": 55.527141
-                                                        },
-                                                        {
-                                                            "name": "Brantevik Stengården (Simrishamn kn)",
-                                                            "lon": 14.346119,
-                                                            "lat": 55.523591
-                                                        },
-                                                        {
-                                                            "name": "Brantevik Styrmansgatan (Simrishamn kn)",
-                                                            "lon": 14.345049,
-                                                            "lat": 55.519869
-                                                        },
-                                                        {
-                                                            "name": "Brantevik (Simrishamn kn)",
-                                                            "lon": 14.34771,
-                                                            "lat": 55.513936
-                                                        },
-                                                        {
-                                                            "name": "Brantevik Gislövsvägen (Simrishamn kn)",
-                                                            "lon": 14.347197,
-                                                            "lat": 55.512381
-                                                        },
-                                                        {
-                                                            "name": "Knutsvik (Simrishamn kn)",
-                                                            "lon": 14.334738,
-                                                            "lat": 55.508525
-                                                        },
-                                                        {
-                                                            "name": "Hylkan (Simrishamn kn)",
-                                                            "lon": 14.324203,
-                                                            "lat": 55.501783
-                                                        },
-                                                        {
-                                                            "name": "Tre Kronor (Simrishamn kn)",
-                                                            "lon": 14.314674,
-                                                            "lat": 55.494663
-                                                        },
-                                                        {
-                                                            "name": "Hammarlunda (Simrishamn kn)",
-                                                            "lon": 14.308759,
-                                                            "lat": 55.490699
-                                                        }
-                                                        ],
-                                                        "type": "Länstrafik - Buss"
+                                                        "name": "Malmö Dalaplan",
+                                                        "lon": 13.006205,
+                                                        "lat": 55.586039
                                                     },
                                                     {
-                                                        "startName": "Hammarlunda (Simrishamn kn)",
-                                                        "destName": "55.489000, 14.314400",
-                                                        "startLon": 14.308759,
-                                                        "startLat": 55.490699,
-                                                        "destLon": 14.314396,
-                                                        "destLat": 55.489,
-                                                        "stops": []
+                                                        "name": "Malmö Södervärn",
+                                                        "lon": 13.006933,
+                                                        "lat": 55.588682
+                                                    },
+                                                    {
+                                                        "name": "Malmö Tandvårdshögskolan",
+                                                        "lon": 13.001045,
+                                                        "lat": 55.590929
+                                                    },
+                                                    {
+                                                        "name": "Malmö Triangeln station",
+                                                        "lon": 13.001467,
+                                                        "lat": 55.593203
                                                     }
-                                                    ]
+                                                    ],
+                                                    "type": "Länstrafik - Buss"
+                                                },
+                                                {
+                                                    "startName": "Malmö Triangeln station",
+                                                    "destName": "Simrishamn station",
+                                                    "startLon": 13.001467,
+                                                    "startLat": 55.593203,
+                                                    "destLon": 14.351944,
+                                                    "destLat": 55.554028,
+                                                    "stops": [
+                                                    {
+                                                        "name": "Malmö Triangeln station",
+                                                        "lon": 13.001467,
+                                                        "lat": 55.593203
+                                                    },
+                                                    {
+                                                        "name": "Malmö Hyllie station",
+                                                        "lon": 12.976927,
+                                                        "lat": 55.563152
+                                                    },
+                                                    {
+                                                        "name": "Oxie station (Malmö kn)",
+                                                        "lon": 13.096169,
+                                                        "lat": 55.541632
+                                                    },
+                                                    {
+                                                        "name": "Svedala station",
+                                                        "lon": 13.232409,
+                                                        "lat": 55.506871
+                                                    },
+                                                    {
+                                                        "name": "Skurup station",
+                                                        "lon": 13.500378,
+                                                        "lat": 55.480074
+                                                    },
+                                                    {
+                                                        "name": "Rydsgård station (Skurup kn)",
+                                                        "lon": 13.587492,
+                                                        "lat": 55.474231
+                                                    },
+                                                    {
+                                                        "name": "Svarte station (Ystad kn)",
+                                                        "lon": 13.717116,
+                                                        "lat": 55.428485
+                                                    },
+                                                    {
+                                                        "name": "Ystad station",
+                                                        "lon": 13.824574,
+                                                        "lat": 55.427316
+                                                    },
+                                                    {
+                                                        "name": "Köpingebro station (Ystad kn)",
+                                                        "lon": 13.935644,
+                                                        "lat": 55.457223
+                                                    },
+                                                    {
+                                                        "name": "Tomelilla station",
+                                                        "lon": 13.948939,
+                                                        "lat": 55.546549
+                                                    },
+                                                    {
+                                                        "name": "Lunnarp station (Tomelilla kn)",
+                                                        "lon": 14.041924,
+                                                        "lat": 55.541228
+                                                    },
+                                                    {
+                                                        "name": "Smedstorp station (Tomelilla kn)",
+                                                        "lon": 14.11755,
+                                                        "lat": 55.54957
+                                                    },
+                                                    {
+                                                        "name": "Gärsnäs station (Simrishamn kn)",
+                                                        "lon": 14.181023,
+                                                        "lat": 55.546513
+                                                    },
+                                                    {
+                                                        "name": "Simrishamn station",
+                                                        "lon": 14.351944,
+                                                        "lat": 55.554028
+                                                    }
+                                                    ],
+                                                    "type": "Länstrafik - Tåg"
+                                                },
+                                                {
+                                                    "startName": "Simrishamn station",
+                                                    "destName": "Hammarlunda (Simrishamn kn)",
+                                                    "startLon": 14.351944,
+                                                    "startLat": 55.554028,
+                                                    "destLon": 14.308759,
+                                                    "destLat": 55.490699,
+                                                    "stops": [
+                                                    {
+                                                        "name": "Simrishamn station",
+                                                        "lon": 14.351944,
+                                                        "lat": 55.554028
+                                                    },
+                                                    {
+                                                        "name": "Simrishamn Annelundsvägen",
+                                                        "lon": 14.351836,
+                                                        "lat": 55.545533
+                                                    },
+                                                    {
+                                                        "name": "Frägård (Simrishamn kn)",
+                                                        "lon": 14.348582,
+                                                        "lat": 55.527141
+                                                    },
+                                                    {
+                                                        "name": "Brantevik Stengården (Simrishamn kn)",
+                                                        "lon": 14.346119,
+                                                        "lat": 55.523591
+                                                    },
+                                                    {
+                                                        "name": "Brantevik Styrmansgatan (Simrishamn kn)",
+                                                        "lon": 14.345049,
+                                                        "lat": 55.519869
+                                                    },
+                                                    {
+                                                        "name": "Brantevik (Simrishamn kn)",
+                                                        "lon": 14.34771,
+                                                        "lat": 55.513936
+                                                    },
+                                                    {
+                                                        "name": "Brantevik Gislövsvägen (Simrishamn kn)",
+                                                        "lon": 14.347197,
+                                                        "lat": 55.512381
+                                                    },
+                                                    {
+                                                        "name": "Knutsvik (Simrishamn kn)",
+                                                        "lon": 14.334738,
+                                                        "lat": 55.508525
+                                                    },
+                                                    {
+                                                        "name": "Hylkan (Simrishamn kn)",
+                                                        "lon": 14.324203,
+                                                        "lat": 55.501783
+                                                    },
+                                                    {
+                                                        "name": "Tre Kronor (Simrishamn kn)",
+                                                        "lon": 14.314674,
+                                                        "lat": 55.494663
+                                                    },
+                                                    {
+                                                        "name": "Hammarlunda (Simrishamn kn)",
+                                                        "lon": 14.308759,
+                                                        "lat": 55.490699
+                                                    }
+                                                    ],
+                                                    "type": "Länstrafik - Buss"
+                                                },
+                                                {
+                                                    "startName": "Hammarlunda (Simrishamn kn)",
+                                                    "destName": "55.489000, 14.314400",
+                                                    "startLon": 14.308759,
+                                                    "startLat": 55.490699,
+                                                    "destLon": 14.314396,
+                                                    "destLat": 55.489,
+                                                    "stops": []
                                                 }
+                                                ]
+                                            }
 
                 
                 .row
