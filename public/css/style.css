@@ -1,7 +1,8 @@
 .header {
-    margin: 1% 0 1% 0;
+    margin-top: 1vh;
     padding: 1%;
     box-shadow: 0 10px 10px -10px #bebebe80;
+    height: 13vh;
 }
 
 h4 {
@@ -19,18 +20,19 @@ h4 {
 
 #map {
     height: 70vh;
-    width: 110vh;
-    margin: 1%;
+    width: 60vw;
+    margin-top: 2vh;
+    
     
   }
 
 .footer {
     box-shadow: 0 -5px 9px -6px #bebebe80;
-    height: 20px;
+    height: 8vh;
 }
 
 .footer > p {
-    padding-top: 1.5vh;
+    padding-top: 0.5vh;
 }
 
 .card-header{
@@ -53,12 +55,20 @@ a {
 .wrapper {
     border-radius: 15px;
     box-shadow: 0 0 3px rgb(226, 226, 226);
-   
+    min-height: calc(100vh - 26vh);
     margin: 2vh;
 }
 
 #APIdoc {
     margin-top: 4vh;
+}
+
+.aside {
+    padding: 2vh 7vh 0 7vh;
+}
+
+.back > a {
+    color: white;
 }
 
 /*#locationButton {

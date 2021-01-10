@@ -15,22 +15,6 @@ function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
 
-
-  
-
-
-    
-    /*
-    $('#accordion').append(`
-    <div class="collapse show" id="accItem_${item.id}" aria-labelledby="headingOne"  
-    data-parent="#accordion" style="">
-      <div class="card-body">
-      </div> ${item.description} </div>
-      <div class="card-header" id="headingOne"><h5 class="mb-0">
-        </h5><button class="btn" data-toggle="collapse" data-target="#accItem_${item.id}" 
-    aria-expanded="false" aria-controls="accItem${item.id}">${item.title}</button></div>`)
-
-    */
   }
 
   

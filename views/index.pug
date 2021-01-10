@@ -18,38 +18,38 @@ html
          h1.text-center 
             a.titel(href='/') Solresan
       .wrapper   
-         .container
-            .row
-               .col-5.text-center
-                  .aside
-                     .divSubmit(id = 'divSubmit')
-                        h4 Åk dit det finaste vädret är! 
-                        
-                        p Solresan hjälper dig hitta det finaste vädret i din närhet. blabsdlabdlsbdlabbalbllbal
-                        p Trcyk på knapp nedan , jdkjadksjdksajksjdkadja
+         
+         .row
+            .col-4.text-center
+               .aside
+                  .divSubmit(id = 'divSubmit')
+                     h4 Åk dit det finaste vädret är! 
                      
-                        
-                        .search
-                           .container
-                                 label(for="location") Sök efter din plats  
-                                 .row
-                                    .input-group.input-group-lg                  
-                                       input.form-control(type='text' placeholder='Skriv in plats ' name = 'place' id='place')
-                                       button.btn.btn-primary.getPlace(id= 'customLocationBtn')  Sök
+                     p Solresan hjälper dig hitta det finaste vädret i din närhet. blabsdlabdlsbdlabbalbllbal
+                     p Trcyk på knapp nedan , jdkjadksjdksajksjdkadja
+                  
+                     
+                     .search
+                           label(for="location") Sök efter din plats  
                            .row
-                              p Eller använd din nuvarande position 
-                           button.btn.btn-primary.get_data(type='button') Hämta
-                     
+                              .input-group.input-group-lg                  
+                                 input.form-control(type='text' placeholder='Skriv in plats ' name = 'place' id='place')
+                                 button.btn.btn-primary.getPlace(id= 'customLocationBtn')  Sök
+                     .row
+                        p Eller använd din nuvarande position 
+                     button.btn.btn-primary.get_data(type='button') Hämta
+               
                   .divResList(id = 'resList')
                      
                      #accordion.accordion
-                     button.btn.btn-primary.restoreBtn(type = 'button' name = 'refresh' id = 'restore') Tillbaka
+                     button.btn.btn-primary.back.restoreBtn(type = 'button' name = 'refresh' id = 'restore') 
+                        a(href='/') Tillbaka
                      //p.bus Det är finast väder i <placeholder> och du tar dig dit genom xxxxx.   
 
-               .col-7
-                  #map
-      .footer.fixed-footer
-         p.text-center 
+            .col-8
+               #map
+      nav.navbar.navbar-light.fixed-bottom.footer
+          p.navbar-brand.mx-auto 
             a(href='/api') API-dokumentation
 
 
