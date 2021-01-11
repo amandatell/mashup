@@ -161,7 +161,7 @@ document.querySelector('.getPlace').addEventListener("click", () => {
   markMap();  
 });
 
-// Läser/uppdaterar/skickar platstjänstdata efter samtliga argument uppfyllts. 
+// Gör anrop till backend - Indata: Plats , Utdata: JSON objekt med samtlig data. 
 function getDataPlace(place){
   $.ajax({
     url: 'http://localhost:3000/?place=' + place,
@@ -177,7 +177,7 @@ function getDataPlace(place){
   });
 
 }
-// Läser/uppdaterar/skickar platstjänstdata med latitude & longitude värden efter samliga argument uppfyllts 
+// Gör anrop till backend - Indata: Kordinater Lat & Lng, Utdata: JSON objekt med samtlig data. 
 function getData(pos){
   $.ajax({
     url: 'http://localhost:3000/?lat= '+ pos.lat + '&lng=' + pos.lng,
