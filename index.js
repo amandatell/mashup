@@ -2,7 +2,7 @@ const express = require('express');
 const { render } = require('pug');
 const apiController = require('./APICallers/apiController');
 const app = express()
-const port = 3000
+const port = 80
 
 app.set('view engine', 'pug');
 app.set('views','./views');

@@ -54,7 +54,9 @@ function getBestWeather(curLat, curLong) {
         ['cloud'] : null
     };
     
-
+    //Här plockas både inrapporterad moln-data och temperatur inom ett specifikt område ut, och placeras
+    //i nya arrayer för analys. När molndata plockas ut kontrolleras även ifall det finns skillnader i dessa
+    //för att avgöra om det är moln eller temperatur resultatet ska baseras på.
     for(var i in cloudDataCache.station){
         let element = cloudDataCache.station[i];
         
@@ -135,9 +137,10 @@ function getBestWeather(curLat, curLong) {
 }
 
 
-
+/*
+Metoden uppdaterar data-cachen.
+*/
 function getData() {
-    //check if data is up to date.
     getTemp((cloudData, tempdata) => {
         cloudDataCache = cloudData;
         tempDataCache = tempdata;
