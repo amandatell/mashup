@@ -10,14 +10,19 @@ app.use(express.static('public'));
 app.use(express.json());
 apiController.cacheData();
 
+// Ändpunkt för startsidan
 app.get('/', (req, res) => {
-    //console.log("Get");
-    //console.log(req.query);
     const accept = req.accepts(['html', 'json'])
     if (accept === 'html') {
-        
         res.render('index')
-
+    
+    /*
+        Ifall accept === JSON 
+        så kollas parametern först.
+        Ifall parametern är place så tas åäö först bort 
+        och görs om till koordinater och skickas sedan till getData
+        Samma svar kommer att skickas till klient vilken parameter som än skickades
+    */
     } else if (accept === 'json') { 
         if (req.query.place) {
             let place = apiController.removeUmlaut(req.query.place);
@@ -28,12 +33,13 @@ app.get('/', (req, res) => {
                         console.log("RESPONSE SENT:")
                         console.log(response)   
                         res.json(response)
+                    // Status-kod 400 skickas ifall platsen inte finns
                     } else res.status(400).send({
                         error: 'Ingen plats hittades. Var god och kolla stavningen.',
                         statusCode: 400
                     });;
                 }
-                    
+                // Status.kod 404 skickas ifall ingen kollektivtrafik hittades
                 else{
                     res.status(404).send({
                         error: 'Ingen kollektivtrafik hittades. Var god och byt startpunkt.',
@@ -48,16 +54,12 @@ app.get('/', (req, res) => {
             let lng = req.query.lng;
             goal = apiController.getData(lat, lng).then(response => {
                 res.json(response)
-                console.log('log1: ' + response)
             });
-            //console.log(goal);
-            //res.json(goal);
         }
-    } else {
-        res.render('404')
-    }
+    } 
 })
 
+// Ändpunkt för API-dokumentationen
 app.get('/api', (req, res) => {
     const accept = req.accepts('html')
     if (accept === 'html') {
@@ -69,10 +71,3 @@ app.get('/api', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
-
-/*
-function getData(pos){
-    //window.location.search
-  
-
-}*/
