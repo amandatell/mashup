@@ -26,12 +26,9 @@ app.get('/', (req, res) => {
     } else if (accept === 'json') { 
         if (req.query.place) {
             let place = apiController.removeUmlaut(req.query.place);
-            console.log(place)
             apiController.getCoords(place).then(response => {
                 if (response != null){
-                    if(response != "locNotFound"){
-                        console.log("RESPONSE SENT:")
-                        console.log(response)   
+                    if(response != "locNotFound"){   
                         res.json(response)
                     // Status-kod 400 skickas ifall platsen inte finns
                     } else res.status(400).send({
