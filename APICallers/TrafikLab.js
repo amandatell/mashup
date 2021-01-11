@@ -2,7 +2,6 @@ https = require('https')
 const axios = require('axios')
 
 // Returns an array of route coordinates based on start and destination coordinates.
-
 function getRoute(startLat, startLon, destLat, destLon) {
     return new Promise(function (resolve, reject) {
         console.log('Trafiklab: Fetching data...')
@@ -26,6 +25,7 @@ function getRoute(startLat, startLon, destLat, destLon) {
                         destLon: element.Destination.lon,
                         destLat: element.Destination.lat,
 
+                        //Start and destination times
                         startTime: element.Origin.time,
                         destTime: element.Destination.time,
         
@@ -36,7 +36,8 @@ function getRoute(startLat, startLon, destLat, destLon) {
                     if (element.hasOwnProperty('Product')) {
                         coordinatesObj["type"] = element.Product.catOutL;
                     }
-        
+                    
+                        //Array of stops on the way
                     if (element.hasOwnProperty('Stops')) {
                         var s = element.Stops.Stop;
                         s.forEach(element => {
