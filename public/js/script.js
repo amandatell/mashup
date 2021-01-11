@@ -129,7 +129,6 @@ function markMap(){
       stopover: true,
     });
   }
-  console.log(waypointsstop)
   directionsRenderer.setMap(map)
   var request = {
     origin: origin,
@@ -137,7 +136,7 @@ function markMap(){
     travelMode: 'WALKING',
     waypoints: waypointsstop
   }
-  // Skapar en rutt från start till slut med samtliga stopp som sedan presenteras på kartan
+  // Skapar en rutt från start till slut med samtliga stopp som sedan presenteras på kartan om alla requests uppfylls & status == ok 
   directionsService.route(request, function(response, status) {
     if (status == 'OK') {
       console.log("directions:", response)
@@ -145,9 +144,7 @@ function markMap(){
     }
   });
   
-  //startMarker.setMap(map);
   markers.push(startMarker)
-  //markers.setMap(map);
   markers.push(goalMarker);
   markers.forEach(marker => marker.setMap(map));
   infoWindow.open(map);
@@ -171,13 +168,11 @@ function getDataPlace(place){
     async: false,
     headers: {"Accept": "application/json"},
     error: function (request) {
-      console.log(arguments)
       error(arguments);
   },
   })
   .done(function (data) { 
       finalData = data;
-      console.log(finalData)
       showResults(finalData);
   });
 
