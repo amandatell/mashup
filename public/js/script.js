@@ -1,5 +1,3 @@
-
-
 let map, infoWindow;
 let finalData;
 var markers = [];
@@ -8,7 +6,8 @@ $( document ).ready(function() {
   document.getElementById('resList').style.visibility = "hidden";
 });
 
-function initMap() {
+// Kallar på en centrerad karta med info-boxar från Google-Maps API:et
+function initMap() {  
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 59.622689, lng: 14.429024 }, 
     zoom: 5,
@@ -17,7 +16,7 @@ function initMap() {
 
   }
 
-  
+// Hanterar presentationen av resultatet för accordion-resvägen - Indata: results, Utdata: item{}
 function showResults(results){
   clearAccordion();
   document.getElementById('divSubmit').style.display = "none";
@@ -46,16 +45,18 @@ function showResults(results){
   }
   
 }
-
+// Ska denna tas bort? 
 function removeResults(){
   document.getElementById('divSubmit').style.display = "block";
   document.getElementById('resList').style.visibility = "hidden";
 }
 
+// Rensar stoppen i resvägspresentationen 
 function clearAccordion(){
   $('#accordion').html("");
 }
 
+// Presenterar ett stopp för resvägspresentationen på sidan
 function addItemToAccordion(item){
   $('#accordion').append(
   `
@@ -76,8 +77,9 @@ function addItemToAccordion(item){
 
   }
 
+  // Utförs vid en klick-EventListener för platstjänst-servicen.
   document.querySelector('.get_data').addEventListener("click", () => {
-    // Try HTML5 geolocation.
+    // Testar HTML5 Geolocation för akutell position.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -86,7 +88,7 @@ function addItemToAccordion(item){
             lng: position.coords.longitude,
           };
           
-          // To add the marker to the map, call setMap();
+          // Hämtar data om aktuella platsen och kör markMap funktionen
           getData(pos);
           markMap();
           
@@ -96,12 +98,12 @@ function addItemToAccordion(item){
         }
       );
     } else {
-      // Browser doesn't support Geolocation
+      // Errorhandling om platsen inte finns
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
 
-
+// Errorhandling för platstjänsten, geolocation kontroll med meddelanden till användare baserat på felet
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -112,7 +114,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 
 }
-
+// Initierar funktionerna och markeringarna på kartan med anropen till Google-API:er för en ny karta - Indata: finalData, Utdata: response
 function markMap(){
   initMap();
   var directionsService = new google.maps.DirectionsService();
@@ -127,6 +129,7 @@ function markMap(){
     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
   });
 
+  // Initierar och sätter samtliga variabler som krävs för Direction och Waypoint-API:et
   var origin = new google.maps.LatLng(finalData.start);
   var destination = new google.maps.LatLng(finalData.goal);
   var waypointsstop = []
@@ -146,12 +149,14 @@ function markMap(){
     travelMode: 'WALKING',
     waypoints: waypointsstop
   }
+  // Skapar en rutt från start till slut med samtliga stopp som sedan presenteras på kartan
   directionsService.route(request, function(response, status) {
     if (status == 'OK') {
       console.log("directions:", response)
       directionsRenderer.setDirections(response);
     }
   });
+  
   //startMarker.setMap(map);
   markers.push(startMarker)
   //markers.setMap(map);
@@ -164,12 +169,14 @@ function markMap(){
   map.setZoom(10);
 }
 
+// Hämtar data från plats och kör markMap genom sökfunktionen vid klick
 document.querySelector('.getPlace').addEventListener("click", () => {
   let place = $('#place').val();
   getDataPlace(place);
   markMap();  
 });
 
+// Läser/uppdaterar/skickar platstjänstdata efter samtliga argument uppfyllts. 
 function getDataPlace(place){
   $.ajax({
     url: 'http://localhost:3000/?place=' + place,
@@ -187,7 +194,7 @@ function getDataPlace(place){
   });
 
 }
-
+// Läser/uppdaterar/skickar platstjänstdata med latitude & longitude värden efter samliga argument uppfyllts 
 function getData(pos){
   $.ajax({
     url: 'http://localhost:3000/?lat= '+ pos.lat + '&lng=' + pos.lng,
@@ -205,7 +212,7 @@ function getData(pos){
   });
 
 }
-
+// Argument hantering och errorhantering baserat på argumentet. 
 function error(arguments){
   swal (JSON.stringify(arguments[0].responseJSON.statusCode), arguments[0].responseJSON.error ,  "error" )
 }
