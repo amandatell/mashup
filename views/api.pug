@@ -15,7 +15,7 @@ html
         .header
             h1.text-center 
                 a.titel(href='/') Solresan
-        .wrapper
+        .wrapperapi
             .container
                 .row
                     h3#APIdoc API-dokumentation
@@ -53,7 +53,7 @@ html
                                     .font-monospace
                                         pre.
                                             $.ajax({
-                                                url: 'http://localhost:3000/?place=' + place,
+                                                url: 'http://localhost:3000/?place=malmö,
                                                 headers: {"Accept": "application/json"}
                                             });
                                     | Svar
@@ -292,7 +292,7 @@ html
                     dd.font-monospace.col-sm-3 Accept: application/json
                 .row    
                     dt.col-sm-1 Parameter:
-                    dd.font-monospace.col-sm-5 place
+                    dd.font-monospace.col-sm-5 lat, lng
                 .row    
                     dt.col-sm-1 URL:
                     dd.font-monospace.col-sm-5 http://localhost:3000/?lat=&lt;LATITUD&gt;&amp;lng=&lt;LONGITUD&gt;
