@@ -1,8 +1,7 @@
 https = require('https')
 const axios = require('axios')
 
-// Returns an array of route coordinates based on start and destination coordinates.
-
+//Returnerar en array av ruttkoordinater baserat på start- och destinationskoordinater.
 function getRoute(startLat, startLon, destLat, destLon) {
     return new Promise(function (resolve, reject) {
         console.log('Trafiklab: Fetching data...')
@@ -14,29 +13,31 @@ function getRoute(startLat, startLon, destLat, destLon) {
                 console.log('Trafiklab: Parsing data...')
                 jsonRoute.forEach(element => {
                     var coordinatesObj = {
-                        //Start- and destination names are either the coordinates or the station name
+                        //Start- och destinationsnamn är antingen koordinaterna eller stationsnamnet.
                         startName: element.Origin.name,
                         destName: element.Destination.name,
                         
-                        //Start coordinates
+                        //Startkoordinater.
                         startLon: element.Origin.lon,
                         startLat: element.Origin.lat,
         
-                        //Destination coordinates
+                        //Destinationskoordinater.
                         destLon: element.Destination.lon,
                         destLat: element.Destination.lat,
 
+                        //Start- och destinationstider.
                         startTime: element.Origin.time,
                         destTime: element.Destination.time,
         
-                        //Stops on the way, e.g. bus stops. If array length == 0, there are no stops...
+                        //Stopp på vägen, exempelvis busstationer. Om array-längd == 0, finns det inga stopp...
                         stops: []
                     }
-                        //Type of travel option, e.g. bus, train
+                        //Typ av resalternativ, exempelvis buss eller tåg.
                     if (element.hasOwnProperty('Product')) {
                         coordinatesObj["type"] = element.Product.catOutL;
                     }
-        
+                    
+                        //Array av stopp på vägen.
                     if (element.hasOwnProperty('Stops')) {
                         var s = element.Stops.Stop;
                         s.forEach(element => {
