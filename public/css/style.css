@@ -72,3 +72,10 @@ a {
     color: white;
 }
 
+.wrapperapi {
+    border-radius: 15px;
+    box-shadow: 0 0 3px rgb(226, 226, 226);
+    min-height: calc(100vh - 26vh);
+    margin: 2vh;
+}
+}
