@@ -49,13 +49,12 @@ html
                     #json-place.collapse.col-6
                             .card.mt-3
                                 .card-body
-                                    | Anrop
+                                    | Anrop i jQuery
                                     .font-monospace
                                         pre.
                                             $.ajax({
                                                 url: 'http://localhost:3000/?place=' + place,
-                                                async: false,
-                                                headers: {"Accept": "application/json"},
+                                                headers: {"Accept": "application/json"}
                                             });
                                     | Svar
  
@@ -286,11 +285,14 @@ html
                 .row
                     p Hämta en solresa med hjälp av koordinater.
                 .row
-                    dt.col-sm-1 Anrop:
+                    dt.col-sm-1 Metod:
                     dd.font-monospace.col-sm-2 GET
                 .row
                     dt.col-sm-1 Headers:
                     dd.font-monospace.col-sm-3 Accept: application/json
+                .row    
+                    dt.col-sm-1 Parameter:
+                    dd.font-monospace.col-sm-5 place
                 .row    
                     dt.col-sm-1 URL:
                     dd.font-monospace.col-sm-5 http://localhost:3000/?lat=&lt;LATITUD&gt;&amp;lng=&lt;LONGITUD&gt;
@@ -301,7 +303,14 @@ html
                     #json-coord.collapse.col-6
                             .card.mt-3
                                 .card-body
-                                    | Sökparameter "http://localhost:3000/?lat=55.57905340000001&amp;lng=13.0108705" kan ge följande svar:
+                                    | Anrop i jQuery
+                                    .font-monospace
+                                    pre.
+                                        $.ajax({
+                                            url: 'http://localhost:3000/?lat=55.57905340000001&amp;lng=13.0108705,
+                                            headers: {"Accept": "application/json"}
+                                        )};
+                                    | Svar
                                     .font-monospace
                                     pre.
                                         {
@@ -309,7 +318,7 @@ html
                                             "lat": 55.57905340000001,
                                             "lng": 13.0108705
                                             },
-                                            "goal": {
+                                            "goal" {
                                             "lat": 55.3837,
                                             "lng": 12.8166
                                             },
