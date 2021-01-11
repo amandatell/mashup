@@ -28,27 +28,16 @@ function showResults(results){
     let leg = results.trafik[i];
     let stops = leg.stops.length;
     let startTime = "<b>" + leg.startTime.substring(0, 5) +  "</b>" + " - ";
-    
     item.description = "Resa från <b>" + leg.startName + "</b>, till <b>" + leg.destName + "</b>";
     if(leg.type != null){
       item.type = leg.type;
     } else{
       item.type = "Inget angett färdsätt."
     }
-    
-      item.stops = stops ; 
-    
-    
-    console.log(item.description);
+    item.stops = stops ; 
     item.title = startTime  + leg.startName + " -> " + leg.destName;
     addItemToAccordion(item);
   }
-  
-}
-// Ska denna tas bort? 
-function removeResults(){
-  document.getElementById('divSubmit').style.display = "block";
-  document.getElementById('resList').style.visibility = "hidden";
 }
 
 // Rensar stoppen i resvägspresentationen 
@@ -74,7 +63,6 @@ function addItemToAccordion(item){
   </div>
   `
     );
-
   }
 
   // Utförs vid en klick-EventListener för platstjänst-servicen.
